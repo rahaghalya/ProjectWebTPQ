@@ -216,4 +216,32 @@ html, body {
         font-size: 1.5rem; /* Judul sedikit lebih kecil */
     }
 }
+.form-button-back {
+    position: absolute; 
+    top: 15px; /* Jarak dari atas box disesuaikan */
+    left: 20px; /* Jarak dari kiri box disesuaikan */
+    
+    /* Style diubah untuk panah saja */
+    font-size: 2.5rem; /* Diperbesar lagi dari 2rem */
+    font-weight: bold; /* Menebalkan panah */
+    color: #aaa; /* Warna abu-abu */
+    text-decoration: none;
+    transition: color 0.3s;
+    
+    display: inline-block; /* Mengatur display */
+    width: 45px; /* Diperbesar lagi dari 40px */
+    height: 45px; /* Diperbesar lagi dari 40px */
+    text-align: center; /* Panah dipusatkan */
+    line-height: 1; /* Tinggi baris disesuaikan */
+    
+    /* Menghapus style tombol sebelumnya */
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    margin-top: 0;
+}
 
+.form-button-back:hover {
+    color: #4CAF50; /* Warna hijau saat hover */
+    background-color: transparent; /* Pastikan background tetap transparan */
+    text-decoration: none; /* Hapus underline saat hover */

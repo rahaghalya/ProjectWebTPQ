@@ -609,7 +609,7 @@ h6 {
 }
 
 .footer .copyright {
-  padding-top: 2   0px;
+  padding-top: 0px;
   padding-bottom: 0px;
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
 }

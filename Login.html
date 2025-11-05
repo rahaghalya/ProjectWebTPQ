@@ -5,54 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
 
-    <link rel="stylesheet" href="assets/css/Login.css">
+    <!-- 
+      PATH DIPERBAIKI:
+      Mengarah ke 'style.css' (sesuai file yang kita buat)
+    -->
+    <link rel="stylesheet" href="/assets/css/Login.css">
 
 </head>
 <body>
 
     <main class="back">
+        
         <div class="card-login">
-            <h2 class="form-title">Login</h2>
-                <form id="loginForm" action="#" method="POST" onsubmit="return false;">
-                    <div class="input-float">
-                        <input id="user" name="user" type="text" required placeholder=" "
-                            class="form-input">
-                        <label for="user" class="input-label">User</label>
-                    </div>
-                    
-                    <div class="input-float">
-                        <input id="pass" name="pass" type="password" required placeholder=" "
-                            class="form-input">
-                        <label for="pass" class="input-label">Password</label>
-                    </div>
-
-                    <div>
-                        <button type="submit" class="form-button">
-                            Login
-                        </button>
-                    </div>
-                </form>
+            
+            <!-- ===== TOMBOL KEMBALI DIPINDAH KE SINI ===== -->
+            <div>
+                <!-- Mengarah ke index.html, ganti jika perlu -->
+                <!-- Teks "Kembali" dihapus, hanya panah -->
+                <a href="index.html" class="form-button-back">
+                    &larr;
+                </a>
             </div>
-        </main>
+
+            <h2 class="form-title">Login</h2>
+            
+            <form id="loginForm" action="#" method="POST" onsubmit="return false;">
+                
+                <div class="input-float">
+                    <input id="user" name="user" type="text" required placeholder=" "
+                           class="form-input">
+                    <label for="user" class="input-label">User</label>
+                </div>
+                
+                <div class="input-float">
+                    <input id="pass" name="pass" type="password" required placeholder=" "
+                           class="form-input">
+                    <label for="pass" class="input-label">Password</label>
+                </div>
+
+                <div>
+                    <button type="submit" class="form-button">
+                        Login
+                    </button>
+                </div>
+
+                <!-- ===== TOMBOL KEMBALI DIHAPUS DARI SINI ===== -->
+            </form>
+        </div>
+    </main>
 
     <div id="modalOverlay" class="modal-overlay hidden"></div>
-        <div id="alertModal" class="alert-in hidden">
-            
-            <h3 style="font-size: 1.25rem; font-weight: 600; color: #333;">
-                Login
-            </h3>
-            
-            <div style="margin-top: 0.5rem;">
-                <p id="logMessage" style="font-size: 0.9rem; color: #555;">
-                    </p>
-            </div>
-            
-            <button id="alertOkButton" type="button" class="modal-button">
-                Ok
-            </button>
+    <div id="alertModal" class="alert-in hidden">
+        
+        <h3 style="font-size: 1.25rem; font-weight: 600; color: #333;">
+            Login
+        </h3>
+        
+        <div style="margin-top: 0.5rem;">
+            <p id="logMessage" style="font-size: 0.9rem; color: #555;">
+                <!-- Pesan akan diisi oleh JavaScript -->
+            </p>
         </div>
+        
+        <button id="alertOkButton" type="button" class="modal-button">
+            Ok
+        </button>
+    </div>
 
+    <!-- 
+      PATH DIPERBAIKI:
+      Mengarah ke 'script.js' (sesuai file yang kita buat)
+    -->
     <script src="/assets/js/Login.js"></script>
 
 </body>
 </html>
+
