@@ -1,161 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+// 1. Memanggil Header
+// (File ini akan otomatis memanggil 'koneksi.php' juga)
+include 'header.php';
+?>
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>TPQ Roudlotulilmi Rembang - Tentang Kami</title>
-  <meta name="description" content="Website resmi TPQ Roudlotul Ilmi Rembang ">
-  <meta name="keywords" content="TPQ, Roudlotul Ilmi">
-
-  <link href="assets/img/LOGO.jpg" rel="icon">
-  <link href="assets/img/LOGO.jpg" rel="apple-touch-icon">
-
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <link href="assets/css/main.css" rel="stylesheet">
-
-</head>
-<?php include 'navbar.php'; ?>
   <main class="main">
     <div class="page-title" data-aos="fade">
       <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">Selamat Datangkontol</h1>
+        <h1 class="mb-2 mb-lg-0">Tentang Kami</h1>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Home</li>
+            <li><a href="index.php">Home</a></li>
+            <li class="current">Tentang Kami</li>
           </ol>
         </nav>
       </div>
-    </div>
-    <section id="home-description" class="home-description section">
+    </div><section id="about" class="about section">
 
-      <div class="container section-title" data-aos="fade-up">
-        <h2>TPQ Roudlotul Ilmi Rembang</h2>
-        <p>Membina Generasi Qur'ani yang Cerdas dan Berakhlak Mulia</p>
-      </div>
-      <div class="container" data-aos="fade-up">
-  
-        <p>
-          Kami berkomitmen untuk menciptakan lingkungan belajar Al-Qur'an yang nyaman, menyenangkan, dan Islami, dengan fokus pada pembelajaran baca tulis Al-Qur'an (BTA), hafalan surat-surat pendek, doa harian, serta praktek ibadah praktis.
-        </p>
-        <p>
-          Didukung oleh tenaga pengajar yang sabar dan kompeten, kami siap membimbing para santri untuk cinta Al-Qur'an, cerdas, dan berakhlak mulia.
-        </p>
-        <br>
-        <p>
-          <a href="about.html" class="btn btn-primary">Pelajari Lebih Lanjut</a>
-          <a href="#contact" class="btn btn-outline-primary ms-2">Hubungi Kami</a>
-        </p>
-      </div>
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Tentang Kami</h2>
+        <p>Kenali Lebih Dekat TPQ Roudlotul Ilmi</p>
+      </div><div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+            <div class="content">
+              <h2>Membina Generasi Qur'ani yang Cerdas dan Berakhlak Mulia</h2>
+              
+              <p class="lead">
+                TPQ Roudlotul Ilmi Rembang adalah lembaga pendidikan non-formal yang berdedikasi untuk memberikan pondasi agama yang kuat bagi putra-putri Anda. Kami berkomitmen untuk menciptakan lingkungan belajar Al-Qur'an yang nyaman, menyenangkan, dan Islami.
+              </p>
 
-    </section>
-    
-    <section id="fakta-smk" class="stats-counter section">
-      <div class="container" data-aos="fade-up">
-        
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Fakta</h2>
-          <p>SMK Telkom Sidoarjo</p>
+              <div class="description">
+                <p>Didukung oleh tenaga pengajar yang sabar dan kompeten, kami membimbing para santri tidak hanya untuk bisa mengaji, tetapi juga memahami dan mengamalkan nilai-nilai Islam dalam kehidupan sehari-hari.</p>
+              </div>
+
+              <div class="stats-row">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300"></div>
+              </div><div class="cta-section" data-aos="fade-up" data-aos-delay="300">
+                <a href="Guru.html" class="btn-link">Kenali Pengajar Kami <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+            <div class="image-container">
+              <img src="assets/img/about/Gambar WhatsApp 2025-10-26 pukul 18.43.37_9810a614.jpg" alt="Kegiatan Mengaji di TPQ Roudlotul Ilmi" class="img-fluid">
+              <div class="image-overlay">
+                <div class="overlay-content">
+                  <i class="bi bi-book-half"></i>
+                  <div class="overlay-text">
+                    <h4>Lingkungan Belajar Islami</h4>
+                    <p>Nyaman dan Menyenangkan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="row gy-4 justify-content-center">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="stats-item text-center">
-              <span data-purecounter-start="0" data-purecounter-end="2" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Jurusan</p>
-            </div>
-          </div><div class="col-lg-4 col-md-6">
-            <div class="stats-item text-center">
-              <span data-purecounter-start="0" data-purecounter-end="717" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Siswa</p>
-            </div>
-          </div><div class="col-lg-4 col-md-6">
-            <div class="stats-item text-center">
-              <span data-purecounter-start="0" data-purecounter-end="639" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Alumni</p>
-            </div>
-          </div></div>
-
       </div>
     </section>
-    </main>
+    <section id="visi-misi" class="visi-misi section light-background"> <!-- Diberi background terang -->
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="visi-misi-item p-4" style="background: var(--surface-color); border-radius: 8px; height: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-eye-fill fs-2 me-3" style="color: var(--accent-color);"></i>
+              <h3 style="font-family: var(--heading-font); font-weight: 700; margin: 0;">Visi Kami</h3>
+            </div>
+            <p class="fst-italic">
+              "Mencetak generasi Qur'ani yang cerdas, berakhlak mulia, dan siap menjadi pemimpin masa depan yang bertaqwa."
+            </p>
+            <p>
+              Visi kami adalah membentuk generasi yang cinta Al-Qur'an, cerdas, dan berakhlak mulia. Kami fokus pada pembelajaran dasar-dasar baca tulis Al-Qur'an (BTA), hafalan surat-surat pendek, doa harian, serta praktek ibadah praktis.
+            </p>
+          </div>
+        </div>
 
-    <footer id="footer" class="footer light-background">
+      <!-- KOLOM MISI -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="visi-misi-item p-4" style="background: var(--surface-color); border-radius: 8px; height: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-bullseye fs-2 me-3" style="color: var(--accent-color);"></i>
+            <h3 style="font-family: var(--heading-font); font-weight: 700; margin: 0;">Misi Kami</h3>
+          </div>
+          <p>
+            Untuk mencapai visi tersebut, kami berkomitmen untuk:
+          </p>
+          <ul style="padding-left: 1.2rem;">
+            <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Menyelenggarakan pembelajaran Al-Qur'an yang efektif dan menyenangkan.</li>
+            <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Membimbing santri dalam hafalan dan pemahaman doa harian.</li>
+            <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Menanamkan nilai-nilai akhlakul karimah melalui praktek ibadah.</li>
+            <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Mengembangkan potensi santri melalui kegiatan ekstrakurikuler Islami.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="struktur-organisasi" class="struktur-organisasi section">
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Struktur Organisasi</h2>
+    <p>Susunan Pengurus TPQ Roudlotul Ilmi</p>
+  </div>
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="struktur-img text-center">
+          <img src="https://placehold.co/1200x800/09947d/white?text=Struktur+Organisasi+TPQ" class="img-fluid" alt="Struktur Organisasi TPQ Roudlotul Ilmi">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </main> 
 
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-6">
-            <h4>Bergabung dengan TPQ Roudllotul Ilmi</h4>
-            <p>Daftar Sekarang</p>
-            <form action="forms/newsletter.php" method="post" class="php-email-form">
-              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your subscriptnkhskahkjdaion request has been sent. Thank you!</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+          <?php
+// 3. Memanggil Footer
+include 'footer.php';
 
-    <div class="container footer-top">
-      <div class="row justify-content-center">
-        <div class="col-lg-6 text-center">
-          <h4>Link Cepat</h4>
-          <ul class="list-inline">
-            <li class="list-inline-item mx-2"><a href="index.html">Home</a></li>
-            <li class="list-inline-item mx-2"><a href="about.html">About</a></li>
-            <li class="list-inline-item mx-2"><a href="#services">Services</a></li>
-            <li class="list-inline-item mx-2"><a href="#portfolio">Portfolio</a></li>
-            <li class="list-inline-item mx-2"><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-        <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">TPQ Roudlotul Ilmi</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer>
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <div id="preloader">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
-  <script src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+// 4. Tutup koneksi
+mysqli_close($koneksi);
+?> 
