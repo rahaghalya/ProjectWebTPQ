@@ -4961,3 +4961,97 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 -----------------------------
+/* custom-nav.css */
+/* Versi FINAL untuk memperbaiki menu desktop */
+
+/* 1. Sembunyikan menu 'ul' dan kontak di desktop */
+@media (min-width: 1200px) {
+    #header .navmenu ul {
+        display: none !important; 
+    }
+    #header .navmenu .contact-info {
+        display: none !important; 
+    }
+}
+
+/* 2. Tampilkan paksa tombol hamburger di desktop */
+#header .navmenu .mobile-nav-toggle {
+    display: block !important; 
+    margin-left: auto; 
+    color: var(--nav-color, #333); 
+    font-size: 50px; 
+    cursor: pointer; 
+    z-index: 9999; 
+    
+    /* Mencegah style mobile (main.css) menimpa ini */
+    position: relative !important; 
+    top: 0 !important;
+    right: 0 !important;
+}
+
+/* 3. SAAT MENU DIBUKA (Tombol "X" aktif) */
+/* Kita paksa tombol "X" tetap di tempat yang sama */
+body.mobile-nav-active #header .navmenu .mobile-nav-toggle {
+    display: block !important;
+    color: var(--nav-color, #333) !important; /* Pastikan warnanya tidak jadi putih */
+}
+
+/* 4. ATUR TAMPILAN MENU POP-UP (Yang "Kesamping") */
+body.mobile-nav-active #header .navmenu ul {
+    display: block !important;
+    position: absolute !important;
+    top: 100px; /* Jarak dari atas (di bawah header) */
+    right: 15px; /* Dekat tombol hamburger */
+    width: 500px; /* Lebar kotak menu */
+    
+    /* Style kotak putih */
+    padding: 50px 0 !important;
+    margin: 0 !important;
+    border-radius: 6px !important; 
+    background-color: var(--nav-mobile-background-color, #ffffff) !important; 
+    overflow-y: auto !important;
+    transition: 0.3s !important;
+    z-index: 9998 !important;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1) !important; 
+
+    /* Hapus 'inset' agar tidak full-screen */
+    inset: auto !important; 
+}
+
+/* 5. ATUR STYLE LINK DI DALAM MENU POP-UP */
+body.mobile-nav-active #header .navmenu ul a,
+body.mobile-nav-active #header .navmenu ul a:focus {
+    padding: 10px 20px !important;
+    font-size: 15px !important;
+    color: var(--nav-dropdown-color, #333) !important;
+    display: block !important; 
+}
+
+body.mobile-nav-active #header .navmenu ul a:hover {
+    color: var(--nav-dropdown-hover-color, #09947d) !important;
+    background-color: transparent !important; 
+}
+
+/* 6. ATUR STYLE DROPDOWN (TENTANG KAMI) DI DALAM POP-UP */
+body.mobile-nav-active #header .navmenu .dropdown ul {
+    position: static !important;
+    display: none !important; 
+    padding: 10px 0 !important;
+    margin: 10px 20px !important;
+    background-color: var(--nav-dropdown-background-color, #fff) !important;
+    border: 1px solid #eee !important;
+    box-shadow: none !important;
+}
+
+/* Tampilkan dropdown jika di-toggle (JS akan menambahkan .dropdown-active) */
+body.mobile-nav-active #header .navmenu .dropdown .dropdown-active {
+    display: block !important;
+}
+
+/* 7. Hapus background gelap di desktop */
+@media (min-width: 1200px) {
+    body.mobile-nav-active .navmenu {
+        background: none !important;
+        position: static !important;
+    }
+}

@@ -113,6 +113,46 @@ include 'header.php';
     </div>
   </div>
 </section>
+    <section id="services" class="services section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Program Unggulan</h2>
+        <p>Program Pembelajaran di TPQ Roudlotul Ilmi</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item item-cyan position-relative" style="height: 100%;">
+              <i class="bi bi-book icon"></i>
+              <h3>BTA (Baca Tulis Al-Qur'an)</h3>
+              <p>Program utama kami menggunakan metode [Nama Metode, misal: Iqro' / Ummi] yang terstruktur dari Jilid 1 hingga 6, membimbing santri dari pengenalan huruf hingga lancar membaca Al-Qur'an dengan tajwid yang benar.</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item item-orange position-relative" style="height: 100%;">
+              <i class="bi bi-gem icon"></i>
+              <h3>Tahfidz (Hafalan Qur'an)</h3>
+              <p>Program hafalan intensif yang berfokus pada Juz 'Amma (Juz 30), surat-surat pilihan, dan doa-doa harian. Setoran hafalan dilakukan secara rutin untuk menjaga kualitas hafalan santri.</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item item-teal position-relative" style="height: 100%;">
+              <i class="bi bi-person-check icon"></i>
+              <h3>Fiqih & Praktek Ibadah</h3>
+              <p>Pembelajaran teori dan praktek ibadah wajib sehari-hari, seperti tata cara wudhu yang benar, praktek sholat fardhu, dan pengenalan dasar-dasar fiqih (Thaharah, Sholat, Puasa).</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item item-blue position-relative" style="height: 100%;">
+              <i class="bi bi-heart icon"></i>
+              <h3>Akhlak & Adab</h3>
+              <p>Menanamkan nilai-nilai akhlakul karimah (akhlak terpuji) dalam kehidupan sehari-hari, seperti adab kepada orang tua, guru, teman, serta adab makan, minum, dan belajar.</p>
+            </div>
+          </div>
+            </div>
+        </div>
+    </section>
   </main> 
 
           <?php

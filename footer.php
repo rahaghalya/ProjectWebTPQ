@@ -28,8 +28,7 @@
                 <li><i class="bi bi-chevron-right"></i> <a href="index.php">Home</a></li>
                 <li><i class="bi bi-chevron-right"></i> <a href="about.php">Tentang Kami</a></li>
                 <li><i class="bi bi-chevron-right"></i> <a href="Sejarah.php">Sejarah</a></li>
-                <li><i class="bi bi-chevron-right"></i> <a href="programpembelajaran.php">Program Pembelajaran</a></li>
-                <li><i class="bi bi-chevron-right"></i> <a href="#">Kontak</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="https://wa.me/message/I7EOQHDYJEXDL1 ">Kontak</a></li>
               </ul>
             </div>
               <div class="col-lg-5 col-md-6 footer-contact">
@@ -58,6 +57,8 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
   <script src="assets/js/main.js"></script>
 

@@ -26,7 +26,35 @@ include_once 'koneksi.php';
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/maindev.css" rel="stylesheet">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+      if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation(); // Ini kodenya
+
+          document.body.classList.toggle('mobile-nav-active');
+          this.classList.toggle('bi-list');
+          this.classList.toggle('bi-x');
+        });
+      }
+
+      // Mencegah menu menutup saat diklik di dalam
+      const navMenu = document.querySelector('#navmenu');
+      if (navMenu) {
+        navMenu.addEventListener('click', (event) => {
+            if (!event.target.classList.contains('toggle-dropdown')) {
+                event.stopPropagation();
+            }
+        });
+      }
+
+    });
+  </script>
 
 </head>
 <body class="index">
@@ -48,17 +76,9 @@ include_once 'koneksi.php';
         </a>
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="index.php">Home</a></li>
-            <li class="dropdown"><a href="#"><span>Tentang Kami</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="about.php">Profil TPQ</a></li>
-                <li><a href="Guru.php">Profil Guru</a></li>
-                <li><a href="Pelajar.php">Profil Pelajar</a></li>
-              </ul>
-            </li>
-            <li><a href="Sejarah.php">Sejarah</a></li>
-            <li><a href="https://wa.me/message/I7EOQHDYJEXDL1 ">Kontak</a></li>
-            <li><a href="login.html">Login</a></li>
+            <li><a href="siswadev.php">Siswa</a></li>
+            <li><a href="gurudev.php">guru</a></li>
+            <li><a href="beritadev.php">berita</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
