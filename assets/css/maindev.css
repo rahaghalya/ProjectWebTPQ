@@ -5055,3 +5055,160 @@ body.mobile-nav-active #header .navmenu .dropdown .dropdown-active {
         position: static !important;
     }
 }
+    :root {
+        --card-bg: rgba(255, 255, 255, 0.75); /* Latar belakang kartu (sedikit tembus pandang) */
+        --card-border: rgba(255, 255, 255, 0.2);
+        --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        --card-hover-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    body {
+        /* Memastikan background dari headerdev.php terlihat */
+        background-color: transparent !important; 
+    }
+
+    /* Latar belakang utama dan overlay */
+    .fullpage-background {
+        padding-top: 80px; /* Beri jarak dari header (jika header fixed) */
+    }
+
+    .content-overlay {
+        padding-bottom: 4rem;
+    }
+
+    /* DESAIN BARU KARTU STATISTIK */
+    .stat-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        backdrop-filter: blur(10px); /* Efek glassmorphism */
+        text-align: center;
+        height: 100%; /* Penting: membuat semua kartu sama tinggi */
+        transition: all 0.3s ease;
+    }
+    .stat-card .stat-icon {
+        font-size: 3rem;
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+    .stat-card .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--bs-primary, #0d6efd);
+    }
+    .stat-card h5 {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    /* DESAIN BARU AKSI CEPAT (QUICK ACTIONS) */
+    .quick-action {
+        display: block;
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px 15px;
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        height: 100%; /* Penting: membuat semua kartu sama tinggi */
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: var(--bs-dark, #212529);
+    }
+    .quick-action:hover {
+        background: var(--card-hover-bg);
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px 0 rgba(31, 38, 135, 0.2);
+    }
+    .quick-action div {
+        font-size: 2.5rem;
+    }
+    .quick-action h6 {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    /* DESAIN BARU AKTIVITAS TERKINI */
+    .recent-activity {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 25px;
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        backdrop-filter: blur(10px);
+        height: 100%;
+    }
+    .activity-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .activity-item .activity-icon {
+        font-size: 1.5rem;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    /* Warna ikon aktivitas */
+    .bg-santri { background-color: #e7f5ff; }
+    .bg-guru { background-color: #e8f7ee; }
+    .bg-berita { background-color: #fff6e5; }
+    .bg-kelas { background-color: #f3e8ff; }
+
+    /* ===== PERBAIKAN RESPONSIVE (ANDROID/HP) ===== */
+    @media (max-width: 767.98px) {
+        .dashboard-header .display-4 {
+            font-size: 2.5rem; /* Kecilkan judul di HP */
+        }
+        
+        /* Ini akan center-kan judul dan tombol logout di HP */
+        .dashboard-header .text-md-start,
+        .dashboard-header .text-md-end {
+            text-align: center !important;
+        }
+        .dashboard-header .col-md-4 {
+            margin-top: 1rem; /* Beri jarak tombol logout di HP */
+        }
+
+        .stat-card h5 {
+            font-size: 1rem;
+        }
+        .stat-card .stat-number {
+            font-size: 2rem;
+        }
+    }
+/* Animasi slide-down untuk modal */
+@keyframes slideDown {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal.fade-slide .modal-dialog {
+    /* Menerapkan animasi saat modal 'show' (tampil) */
+    animation: slideDown 0.3s ease-out;
+}
+
+/* Style Ikon di dalam Modal */
+.modal-icon {
+    font-size: 3.5rem; /* Icon besar */
+}
+
+/* Backdrop (latar belakang) modal dibuat lebih gelap/blur */
+.modal-backdrop.show {
+    opacity: 0.7;
+    backdrop-filter: blur(3px);
+}
