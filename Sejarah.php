@@ -1,15 +1,11 @@
 <?php
-// 1. Memanggil Header (CSS, Menu, dll)
 include 'header.php';
+// Pastikan koneksi aman
 ?>
 
-<!-- 
-  ===============================================
-  ===== KONTEN UNIK HALAMAN SEJARAH DIMULAI =====
-  ===============================================
--->
 <main class="main">
-  <div class="page-title" data-aos="fade">
+
+  <div class="page-title">
     <div class="container d-lg-flex justify-content-between align-items-center">
       <h1 class="mb-2 mb-lg-0">Sejarah</h1>
       <nav class="breadcrumbs">
@@ -20,81 +16,64 @@ include 'header.php';
       </nav>
     </div>
   </div>
-  <section id="sejarah" class="sejarah section">
-    
-    <!-- Judul Bagian -->
-    <div class="container section-title" data-aos="fade-up">
+
+  <section id="sejarah" class="timeline-section">
+    <div class="container section-title">
       <h2>Perkembangan Kami</h2>
-      <p>Jejak Langkah TPQ Roudlotul Ilmi dari Tahun ke Tahun</p>
-    </div><!-- End Section Title -->
+      <p>Jejak Langkah TPQ Roudlotul Ilmi</p>
+    </div>
 
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
       <ul class="timeline">
-        <!-- Item 1: Tahun 2020 (Kiri) -->
-        <li class="timeline-item">
-          <div class="timeline-image">
-            <img src="https://placehold.co/150x150/09947d/white?text=2020" class="img-fluid" alt="Awal Berdiri 2020">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>2020 - Awal Berdiri</h4>
+
+        <?php
+        // Query Database
+        $query = mysqli_query($koneksi, "SELECT * FROM sejarah ORDER BY tahun ASC");
+
+        // Cek Data
+        if (mysqli_num_rows($query) == 0) {
+            echo "<div class='text-center py-5'>Belum ada data sejarah.</div>";
+        } else {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($query)) {
+                
+                // Logic Zig-Zag Desktop (Genap=Kanan, Ganjil=Kiri)
+                // Variable ini akan dibaca oleh CSS Media Query
+                $posisi_desktop = ($i % 2 == 0) ? 'left' : 'right';
+
+                // Cek Gambar
+                $img_src = "assets/img/sejarah/" . $row['gambar'];
+                if (empty($row['gambar']) || !file_exists($img_src)) {
+                    $img_src = "assets/img/logo.png"; // Gambar default
+                }
+        ?>
+
+        <li class="timeline-item <?php echo $posisi_desktop; ?>">
+            
+            <div class="timeline-img">
+                <img src="<?php echo htmlspecialchars($img_src); ?>" alt="Tahun <?php echo htmlspecialchars($row['tahun']); ?>">
             </div>
-            <div class="timeline-body">
-              <p>TPQ Roudlotul Ilmi didirikan dengan semangat untuk memberantas buta huruf Al-Qur'an. Pembelajaran dimulai dengan 5 santri di teras rumah pendiri.</p>
+
+            <div class="timeline-content">
+                <span class="timeline-year"><?php echo htmlspecialchars($row['tahun']); ?></span>
+                <h3 class="timeline-title"><?php echo htmlspecialchars($row['judul']); ?></h3>
+                <p class="text-muted mb-0">
+                    <?php echo htmlspecialchars($row['deskripsi']); ?>
+                </p>
             </div>
-          </div>
+
         </li>
 
-        <!-- Item 2: Tahun 2021 (Kanan) -->
-        <li class="timeline-item">
-          <div class="timeline-image">
-            <img src="https://placehold.co/150x150/09947d/white?text=2021" class="img-fluid" alt="Kegiatan 2021">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>2021 - Mulai Bertumbuh</h4>
-            </div>
-            <div class="timeline-body">
-              <p>Jumlah santri bertambah menjadi 20 orang. Kegiatan belajar mengajar pindah ke Musholla terdekat untuk menampung lebih banyak santri.</p>
-            </div>
-          </div>
-        </li>
-
-        <!-- Item 3: Tahun 2022 (Kiri) -->
-        <li class="timeline-item">
-          <div class="timeline-image">
-            <img src="https://placehold.co/150x150/09947d/white?text=2022" class="img-fluid" alt="Guru Baru 2022">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>2022 - Peresmian Metode</h4>
-            </div>
-            <div class="timeline-body">
-              <p>Secara resmi mengadopsi metode pembelajaran (misal: Iqro' atau Ummi) dan menambah 2 tenaga pengajar baru untuk meningkatkan kualitas pengajaran.</p>
-            </div>
-          </div>
-        </li>
-
-        <!-- Item 4: Tahun 2024 (Kanan) -->
-        <li class="timeline-item">
-          <div class="timeline-image">
-            <img src="https://placehold.co/150x150/09947d/white?text=2024" class="img-fluid" alt="Wisuda 2024">
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4>2024 - Lulusan Pertama</h4>
-            </div>
-            <div class="timeline-body">
-              <p>Mengadakan acara wisuda dan kelulusan untuk 5 santri angkatan pertama yang telah menyelesaikan Al-Qur'an. Santri aktif mencapai 50 orang.</p>
-            </div>
-          </div>
-        </li>
+        <?php 
+                $i++;
+            } 
+        } 
+        ?>
 
       </ul>
     </div>
   </section>
+
 </main>
-<?php
-// 3. Memanggil Footer (JavaScript, dll)
-include 'footer.php';
-?>
+
+<?php include 'footer.php'; ?>

@@ -5,19 +5,12 @@ require_once 'assets/vendor/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-// 2. Inisialisasi DomPDF
 $options = new Options();
 $options->set('isHtml5ParserEnabled', true);
-$options->set('isRemoteEnabled', true); // Izinkan DomPDF memuat gambar eksternal (jika ada)
+$options->set('isRemoteEnabled', true);
 $dompdf = new Dompdf($options);
-$dompdf->setPaper('A4', 'portrait'); // Atur ukuran kertas (A4, potrait)
-
-// 3. Mulai "menangkap" output HTML
-// (Alih-alih mencetak ke layar, kita simpan di variabel)
+$dompdf->setPaper('A4', 'portrait');
 ob_start();
-
-// 4. Masukkan HTML Laporan Anda di Sini
-// (Ini adalah KOPAS dari file laporan.php, tapi TANPA headerdev/footerdev)
 ?>
 
 <style>
@@ -75,7 +68,6 @@ ob_start();
     </thead>
     <tbody>
         <?php
-        // Query yang SAMA PERSIS dengan di laporan.php
         $query_santri = "SELECT no_induk, nama, Alamat, Jilid, nama_orang_tua 
                          FROM santri 
                          WHERE Keterangan = 'Aktif'
@@ -111,19 +103,9 @@ ob_start();
 </div>
 
 <?php
-// 5. Selesai "menangkap" HTML
 $html = ob_get_clean();
-
-// 6. Muat HTML ke DomPDF
 $dompdf->loadHtml($html);
-
-// 7. Render HTML menjadi PDF
 $dompdf->render();
-
-// 8. Kirim file PDF ke browser untuk di-download
-// "laporan-santri.pdf" adalah nama file yang akan di-download
 $dompdf->stream("laporan-santri.pdf", array("Attachment" => 1));
-
-// Selesai
 exit;
 ?>

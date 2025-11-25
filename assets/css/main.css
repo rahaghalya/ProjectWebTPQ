@@ -4864,123 +4864,159 @@ section,
     font-size: 1.3rem;
   }
 }
+.timeline-section {
+    background-color: #f8f9fa;
+    padding: 60px 0 120px 0; 
+    overflow: hidden; 
+    position: relative;
+    width: 100%;
+}
+
 .timeline {
-      list-style: none;
-      padding: 20px 0;
-      position: relative;
-      /* Membuat timeline tidak terlalu lebar di desktop */
-      max-width: 900px;
-      margin: 0 auto; /* Otomatis center */
-    }
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 50px auto; /* Tambah margin bawah 50px */
+    position: relative;
+    max-width: 1200px;
+}
 
-    /* Menghapus garis timeline kiri-kanan */
-    .timeline::before {
-      display: none;
-    }
+/* --- TAMPILAN MOBILE (DEFAULT) - FLEXBOX --- */
+.timeline-item {
+    display: flex;       /* Jejerkan gambar & teks ke samping */
+    gap: 20px;           /* Jarak antar elemen */
+    margin-bottom: 40px;
+    position: relative;
+}
 
+/* Garis Vertikal (Di kiri untuk HP) */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 30px; /* Posisi di tengah gambar (60px / 2) */
+    width: 4px;
+    background: #e9ecef;
+    z-index: 0;
+}
+
+/* Gambar Bulat */
+.timeline-img {
+    flex-shrink: 0;      /* Gambar DILARANG mengecil */
+    width: 60px;         /* Lebar Tetap */
+    height: 60px;        /* Tinggi Tetap */
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid #e9ecef;
+    overflow: hidden;
+    z-index: 10;         /* Di atas garis */
+    position: relative;
+}
+
+.timeline-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Kotak Teks */
+.timeline-content {
+    flex-grow: 1;        /* Ambil sisa lebar layar */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+/* Panah Kecil di Kiri Kotak */
+.timeline-content::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 100%; /* Nempel di kiri kotak */
+    border: 10px solid transparent;
+    border-right-color: #fff; /* Panah arah kanan */
+}
+
+/* Teks Tahun */
+.timeline-year {
+    display: inline-block;
+    background: #0d6efd;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.timeline-title {
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* --- TAMPILAN DESKTOP (LAYAR > 768px) - ZIG ZAG --- */
+@media (min-width: 768px) {
+    
+    /* Ubah Flexbox jadi Block untuk layout ZigZag */
     .timeline-item {
-      margin-bottom: 40px; /* Jarak antar item */
-      position: relative;
-      /* Hapus semua float */
+        display: block; 
+        margin-bottom: 60px;
     }
 
-    /* Menghapus bulatan timeline */
+    /* Garis Pindah ke Tengah */
+    .timeline::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Gambar Pindah ke Tengah (Absolute) */
+    .timeline-img {
+        width: 80px;
+        height: 80px;
+        position: absolute; 
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        border-width: 5px;
+    }
+
+    /* Kotak Konten jadi lebih kecil (kurang dari setengah layar) */
+    .timeline-content {
+        width: 44%; 
+    }
+
+    /* --- LOGIKA KIRI (Left) --- */
+    .timeline-item.left .timeline-content {
+        float: left;
+        text-align: right; 
+    }
+    .timeline-item.left .timeline-content::before {
+        left: 100%; /* Panah di kanan kotak */
+        right: auto;
+        border-right-color: transparent;
+        border-left-color: #fff;
+    }
+
+    /* --- LOGIKA KANAN (Right) --- */
+    .timeline-item.right .timeline-content {
+        float: right;
+        text-align: left; 
+    }
+    .timeline-item.right .timeline-content::before {
+        right: 100%; /* Panah di kiri kotak */
+        left: auto;
+        border-left-color: transparent;
+        border-right-color: #fff;
+    }
+
+    /* Clearfix wajib */
     .timeline-item::after {
-      display: none;
+        content: "";
+        display: block;
+        clear: both;
     }
-
-    .timeline-panel {
-      width: 100%; /* Panel memakan 100% lebar dari container timeline */
-      border: 1px solid #e9ecef;
-      border-radius: 8px;
-      padding: 25px;
-      position: relative;
-      background-color: var(--surface-color, #fff);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      text-align: left; /* Teks selalu rata kiri */
-      margin-bottom: 20px; /* Jarak antara panel teks dan gambar */
-    }
-    
-    /* Menghapus semua style panel kiri/kanan */
-    .timeline-item:nth-child(odd) .timeline-panel,
-    .timeline-item:nth-child(even) .timeline-panel {
-      float: none;
-      text-align: left;
-    }
-    
-    /* Menghapus panah */
-    .timeline-panel::before {
-        display: none;
-    }
-
-    .timeline-image {
-        width: 100%; /* Gambar memakan 100% lebar */
-        float: none;
-        padding: 0;
-    }
-
-    .timeline-item:nth-child(even) .timeline-image {
-        float: none;
-        padding: 0;
-    }
-    
-    .timeline-image img {
-        width: 100%;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .timeline-heading h4 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent-color, #09947d);
-      margin-top: 0;
-      margin-bottom: 5px;
-    }
-    
-    .timeline-body p {
-      margin-bottom: 0;
-      color: var(--default-color, #444);
-    }
-    
-    /* Responsif untuk HP (Hampir tidak perlu diubah karena sudah mobile-first) */
-    @media (max-width: 767px) {
-      .timeline {
-        /* Beri sedikit padding di HP */
-        padding-left: 15px;
-        padding-right: 15px;
-      }
-      .timeline-panel {
-        padding: 20px;
-      }
-      .timeline-heading h4 {
-        font-size: 1.3rem;
-      }
-    }
-.timeline { list-style: none; padding: 20px 0 20px; position: relative; }
-        .timeline:before { top: 0; bottom: 0; position: absolute; content: " "; width: 3px; background-color: #eee; left: 50%; margin-left: -1.5px; }
-        .timeline-item { margin-bottom: 20px; position: relative; }
-        .timeline-item:before, .timeline-item:after { content: " "; display: table; }
-        .timeline-item:after { clear: both; }
-        .timeline-item .timeline-panel { width: 46%; float: left; border: 1px solid #ddd; border-radius: 8px; padding: 20px; position: relative; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05); background: var(--surface-color); }
-        .timeline-item:nth-child(even) .timeline-panel { float: right; }
-        .timeline-item .timeline-image { width: 150px; height: 150px; position: absolute; left: 50%; top: 15px; margin-left: -75px; z-index: 10; background-color: #09947d; border-radius: 50%; padding: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
-        .timeline-item .timeline-image img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        .timeline-heading h4 { margin-top: 0; color: var(--accent-color); font-weight: 700; }
-        .timeline-body p { margin-bottom: 0; }
-        
-        /* Panah kecil di panel */
-        .timeline-item .timeline-panel:before { position: absolute; top: 26px; right: -15px; display: inline-block; border-top: 15px solid transparent; border-left: 15px solid #ccc; border-right: 0 solid #ccc; border-bottom: 15px solid transparent; content: " "; }
-        .timeline-item .timeline-panel:after { position: absolute; top: 27px; right: -14px; display: inline-block; border-top: 14px solid transparent; border-left: 14px solid #fff; border-right: 0 solid #fff; border-bottom: 14px solid transparent; content: " "; }
-        .timeline-item:nth-child(even) .timeline-panel:before { right: auto; left: -15px; border-left-width: 0; border-right-width: 15px; }
-        .timeline-item:nth-child(even) .timeline-panel:after { right: auto; left: -14px; border-left-width: 0; border-right-width: 14px; }
-        
-        /* Media Query untuk HP */
-        @media (max-width: 767px) {
-          .timeline:before { left: 30px; }
-          .timeline-item .timeline-panel { width: calc(100% - 60px); float: right; }
-          .timeline-item .timeline-image { left: 0; margin-left: 0; width: 60px; height: 60px; top: 16px; }
-          .timeline-item .timeline-panel { padding-left: 30px; }
-          .timeline-item .timeline-panel:before { right: auto; left: -15px; border-left-width: 0; border-right-width: 15px; }
-          .timeline-item .timeline-panel:after { right: auto; left: -14px; border-left-width: 0; border-right-width: 14px; }
-        }
+}

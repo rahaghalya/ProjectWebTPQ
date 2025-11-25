@@ -3,12 +3,12 @@
 // (File ini akan otomatis memanggil 'koneksi.php' juga)
 include 'header.php';
 
-$query_siswa = "SELECT COUNT(*) AS total_siswa FROM santri WHERE keterangan = '' OR keterangan IS NULL";
-$result_siswa = mysqli_query($koneksi, $query_siswa);
-$data_siswa = mysqli_fetch_assoc($result_siswa);
-$total_siswa = $data_siswa['total_siswa'];
+$query_santri = "SELECT COUNT(*) AS total_santri FROM santri WHERE keterangan = 'aktif' OR keterangan IS NULL";
+$result_santri = mysqli_query($koneksi, $query_santri);
+$data_santri = mysqli_fetch_assoc($result_santri);
+$total_santri = $data_santri['total_santri'];
 
-$query_alumni = "SELECT COUNT(*) AS total_alumni FROM santri WHERE keterangan = 'Keluar'";
+$query_alumni = "SELECT COUNT(*) AS total_alumni FROM santri WHERE Keterangan IN ('Lulus', 'Pindah')";
 $result_alumni = mysqli_query($koneksi, $query_alumni);
 $data_alumni = mysqli_fetch_assoc($result_alumni);
 $total_alumni = $data_alumni['total_alumni'];
@@ -107,10 +107,10 @@ $total_alumni = $data_alumni['total_alumni'];
         <div class="col-lg-4 col-md-6">
           <div class="stats-item text-center">
             <span data-purecounter-start="0" 
-                  data-purecounter-end="<?php echo $total_siswa; ?>" 
+                  data-purecounter-end="<?php echo $total_santri; ?>" 
                   data-purecounter-duration="1" 
                   class="purecounter"></span>
-            <p>Siswa</p>
+            <p>santri</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">

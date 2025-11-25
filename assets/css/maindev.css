@@ -5212,3 +5212,132 @@ body.mobile-nav-active #header .navmenu .dropdown .dropdown-active {
     opacity: 0.7;
     backdrop-filter: blur(3px);
 }
+    .tombol-kembali-custom {
+      font-size: 50px !important;       /* Ukuran ikon besar */
+      color: #000000 !important;        /* Warna Hitam Pekat */
+      font-weight: bold !important;
+      display: inline-flex !important;  /* Pastikan tampil sejajar */
+      align-items: center;
+      text-decoration: none !important;
+      cursor: pointer;
+      margin-left: 15px;
+      padding: 5px;
+    }
+
+    .tombol-kembali-custom:hover {
+      color: #0056b3 !important;        /* Warna biru saat disentuh */
+    }
+.printable-area {
+        background-color: #fff;
+        border: 1px dashed #ccc;       /* Garis putus-putus */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 1200px;             /* Lebar maksimal disamakan */
+        padding: 40px;
+        margin: 20px auto;
+        box-sizing: border-box;
+    }
+
+    /* 2. Kop Surat (Header Flexbox) - SUDAH DIUPDATE */
+    .report-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        
+        /* PERUBAHAN DI SINI: Menggunakan garis solid tebal (bukan double) */
+        border-bottom: 5px solid #000; 
+        
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+
+    .report-header img {
+        width: 100px;
+        height: auto;
+    }
+
+    .header-text {
+        text-align: center;
+        color: #000; /* Mengubah warna default jadi hitam pekat */
+    }
+
+    .header-text h3 {
+        margin: 0 0 5px 0;
+        font-weight: 800;           /* Font sangat tebal */
+        font-size: 28px;            /* Sedikit diperbesar */
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #000;                /* Hitam pekat (sebelumnya biru gelap) */
+        font-family: sans-serif;
+    }
+
+    .header-text p {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;                /* Abu gelap untuk alamat */
+    }
+
+    /* 3. Tabel Custom (Header Hitam) */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    
+    .custom-table thead {
+        background-color: #212529; /* Header Hitam Pekat */
+        color: white;              /* Teks Putih */
+    }
+    
+    .custom-table th, .custom-table td {
+        padding: 12px 10px;
+        border: 1px solid #dee2e6; /* Garis tipis antar sel */
+        vertical-align: middle;
+    }
+
+    /* Pengaturan Lebar Kolom */
+    .col-no { width: 5%; text-align: center; }
+    .col-id { width: 10%; text-align: center; }    
+    .col-nama { width: 30%; }                      
+    .col-alamat { width: 30%; }                    
+    .col-jabatan { width: 15%; text-align: center; } 
+    .col-telp { width: 10%; }                      
+
+    /* 4. Footer Tanda Tangan */
+    .report-footer {
+        margin-top: 50px;
+        text-align: right;
+        padding-right: 30px;
+    }
+
+    /* 5. Mode Print */
+    @media print {
+        .non-printable, .navbar, header, footer, .btn {
+            display: none !important;
+        }
+        .printable-area {
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        /* Memaksa garis tebal header tetap tercetak */
+        .report-header {
+            border-bottom: 5px solid #000 !important;
+        }
+        .table-dark {
+            background-color: #212529 !important;
+            color: white !important;
+            -webkit-print-color-adjust: exact;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            -webkit-print-color-adjust: exact;
+        }
+        @page { size: A4 landscape; margin: 1cm; }
+    }

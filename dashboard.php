@@ -7,6 +7,27 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: index.php');
     exit;
 }
+
+// =================================================================
+// LOGIKA HITUNG STATISTIK DARI DATABASE
+// =================================================================
+
+// 1. Hitung Total Santri (Hanya yang Aktif)
+$q_santri = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM santri WHERE Keterangan = 'Aktif'");
+$d_santri = mysqli_fetch_assoc($q_santri);
+$jumlah_santri = $d_santri['total'];
+
+// 2. Hitung Total Guru (Hanya yang Aktif)
+$q_guru = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM guru WHERE keterangan = 'Aktif'");
+$d_guru = mysqli_fetch_assoc($q_guru);
+$jumlah_guru = $d_guru['total'];
+
+// 3. Hitung Total Kelas (Menghitung variasi 'jilid' yang ada di data santri)
+$q_kelas = mysqli_query($koneksi, "SELECT COUNT(DISTINCT jilid) as total FROM santri");
+$d_kelas = mysqli_fetch_assoc($q_kelas);
+$jumlah_kelas = $d_kelas['total'];
+
+// =================================================================
 ?>
 
 <body>
@@ -14,10 +35,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 <div class="fullpage-background">
     <div class="content-overlay">
         
-        <!-- Dashboard Header -->
         <section class="dashboard-header mb-5">
             <div class="container">
-                <!-- PERBAIKAN: Menambah class 'text-center' untuk HP -->
                 <div class="row align-items-center">
                     <div class="col-md-8 text-center text-md-start">
                         <h1 class="display-4">🏠 Dashboard Admin</h1>
@@ -33,11 +52,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             </div>
         </section>
 
-        <!-- Statistics Section -->
         <section class="container mb-5">
             <div class="row">
-                <!-- PERBAIKAN: Mengubah col-md-3 menjadi col-6 (HP) dan col-lg-3 (Desktop) -->
-                <!-- Ini akan jadi 2x2 di HP/Tablet dan 4x1 di Desktop -->
                 <div class="col-6 col-md-6 col-lg-3 mb-4">
                     <div class="stat-card">
                         <div class="stat-icon">👨‍🎓</div>
@@ -68,7 +84,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 <div class="col-6 col-md-6 col-lg-3 mb-4">
                     <div class="stat-card">
                         <div class="stat-icon">📊</div>
-                        <div class="stat-number" id="tahun-aktif">2024</div>
+                        <div class="stat-number" id="tahun-aktif"><?php echo date('Y'); ?></div>
                         <h5>Tahun Ajaran</h5>
                         <p class="text-muted small">Tahun aktif</p>
                     </div>
@@ -76,16 +92,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             </div>
         </section>
 
-        <!-- Quick Actions & Recent Activity -->
         <section class="section">
         <div class="container-fluid px-4"> 
             <div class="row justify-content-center"> 
-                <div class="col-lg-8 mb-4"> <!-- Tetap col-lg-8 agar tidak terlalu lebar -->
+                <div class="col-lg-8 mb-4"> 
                     <h4 class="mb-4" style="color: var(--heading-color, #333);">Aksi Cepat</h4>
                     <div class="row">
-                        <!-- Baris 1 Aksi Cepat -->
                         <div class="col-6 col-md-3 mb-4">
-                            <a href="data-santri.php" class="quick-action text-decoration-none d-block h-100">
+                            <a href="data_santri.php" class="quick-action text-decoration-none d-block h-100">
                                 <div class="mb-2">👨‍🎓</div>
                                 <h6>Data Santri</h6>
                                 <small class="text-muted">Kelola data santri</small>
@@ -99,33 +113,32 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                             </a>
                         </div>
                         <div class="col-6 col-md-3 mb-4">
-                            <a href="beritadev.php" class="quick-action text-decoration-none d-block h-100">
+                            <a href="kelolaberitadev.php" class="quick-action text-decoration-none d-block h-100">
                                 <div class="mb-2">📰</div>
                                 <h6>Kelola Berita</h6>
                                 <small class="text-muted">Kelola berita</small>
                             </a>
                         </div>
                         <div class="col-6 col-md-3 mb-4">
-                            <a href="laporan.php" class="quick-action text-decoration-none d-block h-100">
-                                <div class="mb-2">📈</div>
-                                <h6>Lihat Laporan</h6>
-                                <small class="text-muted">Lihat laporan</small>
+                            <a href="sejarahdev.php" class="quick-action text-decoration-none d-block h-100">
+                                <div class="mb-2">🏛️</div>
+                                <h6>Kelola Sejarah</h6>
+                                <small class="text-muted">Kelola Sejarah</small>
                             </a>
                         </div>
 
-                        <!-- Baris 2 Aksi Cepat -->
                         <div class="col-6 col-md-3 mb-4">
-                            <a href="jadwal.php" class="quick-action text-decoration-none d-block h-100">
-                                <div class="mb-2">📅</div>
-                                <h6>Jadwal</h6>
-                                <small class="text-muted">Jadwal mengajar</small>
+                            <a href="laporanguru.php" class="quick-action text-decoration-none d-block h-100">
+                                <div class="mb-2">📈</div>
+                                <h6>Lihat Laporan</h6>
+                                <small class="text-muted">Lihat laporan Guru</small>
                             </a>
                         </div>
                         <div class="col-6 col-md-3 mb-4">
-                            <a href="pembayaran.php" class="quick-action text-decoration-none d-block h-100">
-                                <div class="mb-2">💳</div>
-                                <h6>Pembayaran</h6>
-                                <small class="text-muted">Pembayaran SPP</small>
+                            <a href="laporan.php" class="quick-action text-decoration-none d-block h-100">
+                                <div class="mb-2">📈</div>
+                                <h6>Lihat Laporan</h6>
+                                <small class="text-muted">Lihat Laporan Santri</small>
                             </a>
                         </div>
                         <div class="col-6 col-md-3 mb-4">
@@ -148,7 +161,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         </div>
     </section>
 
-        <!-- System Info -->
         <section class="container">
             <div class="row">
                 <div class="col-12">
@@ -162,7 +174,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                                 <strong>Last Backup:</strong> <?php echo date('d M Y H:i'); ?>
                             </div>
                             <div class="col-md-3">
-                                <!-- PERBAIKAN: Memberi ID untuk jam -->
                                 <strong>Server Time:</strong> <span id="server-time-value"><?php echo date('H:i:s'); ?></span>
                             </div>
                             <div class="col-md-3">
@@ -192,12 +203,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <!-- Tombol ini yang akan me-logout -->
                 <a href="logout.php" class="btn btn-danger">Ya, Logout</a>
             </div>
         </div>
     </div>
 </div>
+
 <script>
 // Animated counter for statistics
 function animateCounter(element, target, duration = 1500) {
@@ -217,7 +228,6 @@ function animateCounter(element, target, duration = 1500) {
 // Real-time clock
 function updateClock() {
     const now = new Date();
-    // PERBAIKAN: Menggunakan ID selector yang lebih aman
     const clockElement = document.getElementById('server-time-value');
     if (clockElement) {
         clockElement.textContent = now.toLocaleTimeString('id-ID'); // Format Indonesia
@@ -226,13 +236,13 @@ function updateClock() {
 
 // Initialize counters and clock when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Example data - ganti dengan data dari database Anda jika perlu
-    // Anda bisa mengganti angka ini dengan query PHP
+    
+    // --- DATA DINAMIS DARI PHP DATABASE ---
     const stats = {
-        santri: 215,
-        guru: 12,   
-        kelas: 8,
-        tahun: <?php echo date('Y'); ?> // Ambil tahun saat ini
+        santri: <?php echo $jumlah_santri; ?>, // Total santri dari database
+        guru: <?php echo $jumlah_guru; ?>,     // Total guru dari database
+        kelas: <?php echo $jumlah_kelas; ?>,   // Total kelas dari database
+        tahun: <?php echo date('Y'); ?>        // Tahun saat ini
     };
     
     // Animasikan angka
