@@ -29,41 +29,6 @@ include 'header.php';
     </div><!-- End Section Title -->
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
-      <!-- 
-        CATATAN: 
-        Style untuk 'timeline' ini belum ada di 'main.css' Anda.
-        Saya akan tambahkan style dasarnya agar rapi.
-      -->
-      <style>
-        .timeline { list-style: none; padding: 20px 0 20px; position: relative; }
-        .timeline:before { top: 0; bottom: 0; position: absolute; content: " "; width: 3px; background-color: #eee; left: 50%; margin-left: -1.5px; }
-        .timeline-item { margin-bottom: 20px; position: relative; }
-        .timeline-item:before, .timeline-item:after { content: " "; display: table; }
-        .timeline-item:after { clear: both; }
-        .timeline-item .timeline-panel { width: 46%; float: left; border: 1px solid #ddd; border-radius: 8px; padding: 20px; position: relative; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05); background: var(--surface-color); }
-        .timeline-item:nth-child(even) .timeline-panel { float: right; }
-        .timeline-item .timeline-image { width: 150px; height: 150px; position: absolute; left: 50%; top: 15px; margin-left: -75px; z-index: 10; background-color: #09947d; border-radius: 50%; padding: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
-        .timeline-item .timeline-image img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        .timeline-heading h4 { margin-top: 0; color: var(--accent-color); font-weight: 700; }
-        .timeline-body p { margin-bottom: 0; }
-        
-        /* Panah kecil di panel */
-        .timeline-item .timeline-panel:before { position: absolute; top: 26px; right: -15px; display: inline-block; border-top: 15px solid transparent; border-left: 15px solid #ccc; border-right: 0 solid #ccc; border-bottom: 15px solid transparent; content: " "; }
-        .timeline-item .timeline-panel:after { position: absolute; top: 27px; right: -14px; display: inline-block; border-top: 14px solid transparent; border-left: 14px solid #fff; border-right: 0 solid #fff; border-bottom: 14px solid transparent; content: " "; }
-        .timeline-item:nth-child(even) .timeline-panel:before { right: auto; left: -15px; border-left-width: 0; border-right-width: 15px; }
-        .timeline-item:nth-child(even) .timeline-panel:after { right: auto; left: -14px; border-left-width: 0; border-right-width: 14px; }
-        
-        /* Media Query untuk HP */
-        @media (max-width: 767px) {
-          .timeline:before { left: 30px; }
-          .timeline-item .timeline-panel { width: calc(100% - 60px); float: right; }
-          .timeline-item .timeline-image { left: 0; margin-left: 0; width: 60px; height: 60px; top: 16px; }
-          .timeline-item .timeline-panel { padding-left: 30px; }
-          .timeline-item .timeline-panel:before { right: auto; left: -15px; border-left-width: 0; border-right-width: 15px; }
-          .timeline-item .timeline-panel:after { right: auto; left: -14px; border-left-width: 0; border-right-width: 14px; }
-        }
-      </style>
-
       <ul class="timeline">
         <!-- Item 1: Tahun 2020 (Kiri) -->
         <li class="timeline-item">
@@ -129,12 +94,6 @@ include 'header.php';
     </div>
   </section>
 </main>
-<!-- 
-  ===============================================
-  ===== KONTEN UNIK HALAMAN SEJARAH SELESAI =====
-  ===============================================
--->
-
 <?php
 // 3. Memanggil Footer (JavaScript, dll)
 include 'footer.php';

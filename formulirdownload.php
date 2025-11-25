@@ -85,8 +85,8 @@ if (file_exists($logoPath)) {
     <div class="header">
         <h4>FORMULIR PENDAFTARAN SANTRI BARU</h4>
         <h5>TAMAN PENDIDIKAN AL-QURAN</h5>
-        <h4>ROUDLOTUL ILMI RT02 RW09</h4>
-        <p>Perumahan Fasira Anggun Sejahtera Blok F3 No. 19, HP: 083852141717</p>
+        <h4>ROUDLOTUL ILMI</h4>
+        <p>Perumahan anggun sejahtera Rembang Pasuruan, HP: +62 83824275728</p>
     </div>
 
     <h5 style="text-align:center; margin: 5px 0;">DATA PERSONAL SANTRI BARU</h5>

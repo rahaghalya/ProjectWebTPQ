@@ -32,8 +32,8 @@ ob_start();
 
 <div class="report-header">
     <h3>TPQ ROUDLOTUL ILMI</h3>
-    <p>Jl. Nama Jalan No. 123, Kota Anda, Kode Pos 12345</p>
-    <p>Telepon: (031) 123456 | Email: info@tpqroudlotulilmi.com</p>
+        <p>Perumahan Anggun Sejahtera, Rembang, Pasuruan, Jawa Timur</p>
+        <p>Telepon: +62 83824275728 | Email: tpqroudlotulilmirembang@gmail.com</p>
 </div>
 
 <h4 style="text-align: center; margin: 30px 0;">LAPORAN DATA GURU</h4>
