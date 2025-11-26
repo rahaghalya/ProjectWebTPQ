@@ -50,9 +50,9 @@ include_once 'koneksi.php';
       const navMenu = document.querySelector('#navmenu');
       if (navMenu) {
         navMenu.addEventListener('click', (event) => {
-            if (!event.target.classList.contains('toggle-dropdown')) {
-                event.stopPropagation();
-            }
+          if (!event.target.classList.contains('toggle-dropdown')) {
+            event.stopPropagation();
+          }
         });
       }
     });
@@ -61,10 +61,10 @@ include_once 'koneksi.php';
 
 <body class="index">
 
-<header id="header" class="header sticky-top">
+  <header id="header" class="header sticky-top">
     <div class="branding d-flex align-items-center">
       <div class="container position-relative d-flex align-items-center justify-content-between">
-        
+
         <a href="#" class="logo d-flex align-items-center">
           <img src="assets/img/about/1000105513-removebg-preview.png" alt="Logo TPQ" style="height: 40px; margin-right: 10px;">
           <h1 class="sitename">TPQ Roudlotul ilmi</h1>
@@ -80,21 +80,21 @@ include_once 'koneksi.php';
           <?php
           // 1. Ambil nama file saat ini
           $currentPage = basename($_SERVER['PHP_SELF']);
-          
+
           // 2. Tentukan nama file Dashboard utama Anda
           // PENTING: Jika file dashboard Anda bernama 'dashboard.php', GANTI 'index.php' DI BAWAH MENJADI 'dashboard.php'
-          $dashboardPage = 'dashboard.php'; 
+          $dashboardPage = 'dashboard.php';
 
           // 3. Cek Kondisi
           if ($currentPage == $dashboardPage) {
-              // Jika di Dashboard: Jangan tampilkan apa-apa (Hamburger hilang sesuai request)
+            // Jika di Dashboard: Jangan tampilkan apa-apa (Hamburger hilang sesuai request)
           } else {
-              // Jika BUKAN di Dashboard: Tampilkan Tombol Kembali
-              // Saya hapus 'd-xl-none' supaya muncul di HP DAN KOMPUTER
-              echo '<a href="'.$dashboardPage.'" class="tombol-kembali-custom bi bi-arrow-left" title="Kembali ke Dashboard"></a>';
+            // Jika BUKAN di Dashboard: Tampilkan Tombol Kembali
+            // Saya hapus 'd-xl-none' supaya muncul di HP DAN KOMPUTER
+            echo '<a href="' . $dashboardPage . '" class="tombol-kembali-custom bi bi-arrow-left" title="Kembali ke Dashboard"></a>';
           }
           ?>
-          </nav>
+        </nav>
       </div>
     </div>
-</header>
+  </header>

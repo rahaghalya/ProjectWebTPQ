@@ -16,11 +16,13 @@ if (isset($_POST['simpan'])) {
     $tahun = $_POST['tahun'];
     $judul = $_POST['judul'];
     $deskripsi = $_POST['deskripsi'];
-    
+
     $nama_file_unik = "";
     if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] == 0) {
         $target_dir = "assets/img/sejarah/";
-        if (!file_exists($target_dir)) { mkdir($target_dir, 0777, true); }
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
 
         $file_extension = strtolower(pathinfo($_FILES["gambar"]["name"], PATHINFO_EXTENSION));
         $nama_file_unik = "sejarah-" . time() . "." . $file_extension;
@@ -30,11 +32,13 @@ if (isset($_POST['simpan'])) {
         if (in_array($file_extension, $allowed)) {
             if (!move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
                 $_SESSION['pesan_error'] = "Gagal upload gambar.";
-                echo "<script>window.location='sejarahdev.php?act=tambah';</script>"; exit;
+                echo "<script>window.location='sejarahdev.php?act=tambah';</script>";
+                exit;
             }
         } else {
             $_SESSION['pesan_error'] = "Format file salah.";
-            echo "<script>window.location='sejarahdev.php?act=tambah';</script>"; exit;
+            echo "<script>window.location='sejarahdev.php?act=tambah';</script>";
+            exit;
         }
     }
 
@@ -47,7 +51,7 @@ if (isset($_POST['simpan'])) {
         $_SESSION['pesan_error'] = "Gagal: " . $stmt->error;
     }
     $stmt->close();
-    
+
     echo "<script>window.location='sejarahdev.php';</script>";
     exit;
 }
@@ -55,12 +59,12 @@ if (isset($_POST['simpan'])) {
 // --- PROSES UPDATE (EDIT) ---
 if (isset($_POST['update'])) {
     // PERBAIKAN: Menggunakan 'id' sesuai database
-    $id = $_POST['id']; 
+    $id = $_POST['id'];
     $tahun = $_POST['tahun'];
     $judul = $_POST['judul'];
     $deskripsi = $_POST['deskripsi'];
     $gambar_lama = $_POST['gambar_lama'];
-    
+
     $nama_gambar_baru = $gambar_lama;
 
     if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] == 0) {
@@ -68,7 +72,7 @@ if (isset($_POST['update'])) {
         $file_extension = strtolower(pathinfo($_FILES["gambar"]["name"], PATHINFO_EXTENSION));
         $nama_file_unik = "sejarah-" . time() . "." . $file_extension;
         $target_file = $target_dir . $nama_file_unik;
-        
+
         $allowed = ['jpg', 'jpeg', 'png', 'webp'];
         if (in_array($file_extension, $allowed)) {
             if (move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
@@ -110,7 +114,7 @@ if (isset($_GET['act']) && $_GET['act'] == 'hapus' && isset($_GET['id'])) {
     // PERBAIKAN: Delete WHERE id
     $stmt = $koneksi->prepare("DELETE FROM sejarah WHERE id=?");
     $stmt->bind_param("i", $id);
-    
+
     if ($stmt->execute()) {
         $_SESSION['pesan_sukses'] = "Data berhasil dihapus.";
     } else {
@@ -126,7 +130,7 @@ $act = $_GET['act'] ?? '';
 <main class="main">
     <section class="section">
         <div class="container">
-            
+
             <div class="section-title mt-4">
                 <h2>Manajemen Sejarah</h2>
                 <p>Kelola Jejak Langkah TPQ (Timeline)</p>
@@ -145,7 +149,7 @@ $act = $_GET['act'] ?? '';
                 </div>
             <?php endif; ?>
 
-            <?php switch ($act): 
+            <?php switch ($act):
                 case 'tambah': ?>
                     <div class="card shadow-sm">
                         <div class="card-header bg-primary text-white">
@@ -176,9 +180,10 @@ $act = $_GET['act'] ?? '';
                             </form>
                         </div>
                     </div>
-                <?php break; ?>
+                    <?php break; ?>
 
-                <?php case 'edit': 
+                <?php
+                case 'edit':
                     $id = $_GET['id'];
                     // PERBAIKAN: Select WHERE id
                     $q = mysqli_query($koneksi, "SELECT * FROM sejarah WHERE id='$id'");
@@ -216,17 +221,18 @@ $act = $_GET['act'] ?? '';
                             </form>
                         </div>
                     </div>
-                <?php break; ?>
+                    <?php break; ?>
 
-                <?php default: ?>
+                <?php
+                default: ?>
                     <div class="d-flex justify-content-between mb-3">
                         <a href="?act=tambah" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Tambah Sejarah</a>
                     </div>
-                    <div class="card shadow-sm">
-                        <div class="card-body p-0">
+                    <div class="card mb-3">
+                        <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover mb-0 align-middle">
-                                    <thead class="table-dark">
+                                <table class="table table-striped">
+                                    <thead >
                                         <tr>
                                             <th class="text-center" width="5%">No</th>
                                             <th width="10%">Tahun</th>
@@ -243,22 +249,22 @@ $act = $_GET['act'] ?? '';
                                         if (mysqli_num_rows($q) > 0) {
                                             while ($r = mysqli_fetch_assoc($q)) {
                                         ?>
-                                            <tr>
-                                                <td class="text-center"><?= $no++ ?></td>
-                                                <td class="fw-bold"><?= $r['tahun'] ?></td>
-                                                <td>
-                                                    <?php if (!empty($r['gambar'])): ?>
-                                                        <img src="assets/img/sejarah/<?= $r['gambar'] ?>" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
-                                                    <?php else: ?> - <?php endif; ?>
-                                                </td>
-                                                <td><?= htmlspecialchars($r['judul']) ?></td>
-                                                <td><small class="text-muted"><?= htmlspecialchars(substr($r['deskripsi'], 0, 80)) ?>...</small></td>
-                                                <td class="text-center">
-                                                    <a href="?act=edit&id=<?= $r['id'] ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
-                                                    <a href="?act=hapus&id=<?= $r['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')"><i class="bi bi-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        <?php 
+                                                <tr>
+                                                    <td class="text-center"><?= $no++ ?></td>
+                                                    <td class="fw-bold"><?= $r['tahun'] ?></td>
+                                                    <td>
+                                                        <?php if (!empty($r['gambar'])): ?>
+                                                            <img src="assets/img/sejarah/<?= $r['gambar'] ?>" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                                                        <?php else: ?> - <?php endif; ?>
+                                                    </td>
+                                                    <td><?= htmlspecialchars($r['judul']) ?></td>
+                                                    <td><small class="text-muted"><?= htmlspecialchars(substr($r['deskripsi'], 0, 80)) ?>...</small></td>
+                                                    <td class="text-center">
+                                                        <a href="?act=edit&id=<?= $r['id'] ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                                                        <a href="?act=hapus&id=<?= $r['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')"><i class="bi bi-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                        <?php
                                             }
                                         } else {
                                             echo '<tr><td colspan="6" class="text-center">Belum ada data.</td></tr>';
@@ -269,7 +275,7 @@ $act = $_GET['act'] ?? '';
                             </div>
                         </div>
                     </div>
-                <?php break; ?>
+                    <?php break; ?>
 
             <?php endswitch; ?>
 
@@ -277,7 +283,7 @@ $act = $_GET['act'] ?? '';
     </section>
 </main>
 
-<?php 
-include 'footerdev.php'; 
-ob_end_flush(); 
+<?php
+include 'footerdev.php';
+ob_end_flush();
 ?>

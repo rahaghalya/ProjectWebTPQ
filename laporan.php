@@ -47,6 +47,7 @@ $nomor_urut = $awalData + 1;
         align-items: center;
         padding: 5px;
     }
+
     .sortable-header:hover {
         color: #ffc107;
     }
@@ -64,7 +65,12 @@ $nomor_urut = $awalData + 1;
             font-family: 'Times New Roman', Times, serif;
         }
 
-        .non-printable, .navbar, .footer, .btn, .search-area, .pagination {
+        .non-printable,
+        .navbar,
+        .footer,
+        .btn,
+        .search-area,
+        .pagination {
             display: none !important;
         }
 
@@ -117,11 +123,11 @@ $nomor_urut = $awalData + 1;
 
     <div class="printable-area" id="printArea">
 
-        <div class="report-header d-flex align-items-center justify-content-center mb-4" 
-             style="border-bottom: 3px double black; padding-bottom: 15px;">
+        <div class="report-header d-flex align-items-center justify-content-center mb-4"
+            style="border-bottom: 3px double black; padding-bottom: 15px;">
             <div style="flex: 0 0 100px; text-align: center;">
-                <img src="assets/img/about/1000105513-removebg-preview.png" alt="Logo TPQ" 
-                     style="width: 90px; height: 90px; object-fit: contain;">
+                <img src="assets/img/about/1000105513-removebg-preview.png" alt="Logo TPQ"
+                    style="width: 90px; height: 90px; object-fit: contain;">
             </div>
             <div class="text-center" style="flex-grow: 1;">
                 <h3 class="fw-bold m-0">TPQ ROUDLOTUL ILMI</h3>
@@ -135,8 +141,8 @@ $nomor_urut = $awalData + 1;
         <div class="non-printable search-area mb-3">
             <form action="" method="GET" class="row g-2 justify-content-end">
                 <div class="col-auto">
-                    <input type="text" name="keyword" class="form-control" 
-                           placeholder="Cari..." value="<?= htmlspecialchars($keyword) ?>">
+                    <input type="text" name="keyword" class="form-control"
+                        placeholder="Cari..." value="<?= htmlspecialchars($keyword) ?>">
                 </div>
                 <input type="hidden" name="sort_by" value="<?= $sortBy ?>">
                 <input type="hidden" name="order" value="<?= $order ?>">

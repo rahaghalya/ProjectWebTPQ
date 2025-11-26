@@ -29,9 +29,10 @@ include_once 'koneksi.php';
   <link href="assets/css/main.css" rel="stylesheet">
 
 </head>
+
 <body class="index">
 
-<header id="header" class="header sticky-top">
+  <header id="header" class="header sticky-top">
     <div class="topbar d-flex align-items-center dark-background">
       <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">

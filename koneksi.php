@@ -11,9 +11,8 @@ $db_host = "localhost";   // Biasanya 'localhost'
 $db_user = "root";        // User default XAMPP
 $db_pass = "";            // Password default XAMPP (kosong)
 $db_name = "db_tpq";      // Nama database yang Anda buat di phpMyAdmin
-$db_port = "3307";
 // 2. Buat koneksi
-$koneksi = mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port);
+$koneksi = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
 // 3. Cek koneksi
 if (mysqli_connect_errno()) {
@@ -26,4 +25,3 @@ mysqli_set_charset($koneksi, "utf8mb4");
 
 // Jika koneksi berhasil, script akan lanjut.
 // File ini bisa di-include di file PHP lain untuk memakai variabel $koneksi.
-?>

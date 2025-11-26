@@ -12,7 +12,7 @@ if (isset($_POST['simpan_jadwal'])) {
 
     $query_simpan = "INSERT INTO jadwal_mengajar (hari, jam_mulai, jam_selesai, kelas_jilid, id_guru) 
                      VALUES ('$hari', '$jam_mulai', '$jam_selesai', '$kelas', '$id_guru')";
-    
+
     if (mysqli_query($koneksi, $query_simpan)) {
         echo "<script>alert('Jadwal berhasil ditambahkan!'); window.location='kelolajadwaldev.php';</script>";
     } else {
@@ -60,7 +60,7 @@ if (isset($_GET['hapus'])) {
                                   FROM jadwal_mengajar j 
                                   JOIN guru g ON j.id_guru = g.id_guru 
                                   ORDER BY FIELD(j.hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), j.jam_mulai ASC";
-                        
+
                         $result = mysqli_query($koneksi, $query);
 
                         if (mysqli_num_rows($result) > 0) {
@@ -101,7 +101,7 @@ if (isset($_GET['hapus'])) {
             </div>
             <form action="kelolajadwaldev.php" method="POST">
                 <div class="modal-body">
-                    
+
                     <div class="mb-3">
                         <label class="form-label">Hari</label>
                         <select class="form-select" name="hari" required>

@@ -1,19 +1,20 @@
 <?php
 require_once 'assets/vendor/dompdf/autoload.inc.php';
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
 $options = new Options();
 $options->set('isHtml5ParserEnabled', true);
-$options->set('isRemoteEnabled', true); 
+$options->set('isRemoteEnabled', true);
 $dompdf = new Dompdf($options);
-$dompdf->setPaper('A4', 'portrait'); 
+$dompdf->setPaper('A4', 'portrait');
 
 ob_start();
-$logoPath = $_SERVER['DOCUMENT_ROOT'] . '/WebTPQ/assets/img/about/1000105513-removebg-preview.png'; 
+$logoPath = $_SERVER['DOCUMENT_ROOT'] . '/WebTPQ/assets/img/about/1000105513-removebg-preview.png';
 
 // Pastikan nama folder '/WebTPQ/' sesuai dengan nama folder Anda di htdocs
- 
+
 if (file_exists($logoPath)) {
     $logoData = base64_encode(file_get_contents($logoPath));
     $logoSrc = 'data:image/png;base64,' . $logoData; // Gunakan image/png
@@ -26,58 +27,99 @@ if (file_exists($logoPath)) {
 <style>
     /* 1. Atur margin halaman PDF-nya jadi lebih kecil */
     @page {
-        margin: 20px; /* <-- Margin dikecilkan lagi */
+        margin: 20px;
+        /* <-- Margin dikecilkan lagi */
     }
 
     body {
         font-family: 'Times New Roman', Times, serif;
-        font-size: 9.5pt; /* <-- 2. Font dikecilkan lagi */
-        line-height: 1.2; /* <-- 3. Jarak antar baris dirapatkan */
+        font-size: 9.5pt;
+        /* <-- 2. Font dikecilkan lagi */
+        line-height: 1.2;
+        /* <-- 3. Jarak antar baris dirapatkan */
         margin: 0;
     }
+
     .header {
         text-align: center;
         border-bottom: 3px double #000;
-        padding-bottom: 5px; 
-        margin-bottom: 5px; 
+        padding-bottom: 5px;
+        margin-bottom: 5px;
     }
-    .header img { display: none; }
-    .header h4, .header h5, .header p { margin: 0; }
-    .header h4 { font-size: 14pt; }
-    .header h5 { font-size: 12pt; }
-    .header p { font-size: 9pt; }
-    
+
+    .header img {
+        display: none;
+    }
+
+    .header h4,
+    .header h5,
+    .header p {
+        margin: 0;
+    }
+
+    .header h4 {
+        font-size: 14pt;
+    }
+
+    .header h5 {
+        font-size: 12pt;
+    }
+
+    .header p {
+        font-size: 9pt;
+    }
+
     .section-title {
         font-weight: bold;
         background-color: #f0f0f0;
-        padding: 2px; /* <-- 4. Spasi dikurangi lagi */
+        padding: 2px;
+        /* <-- 4. Spasi dikurangi lagi */
         border: 1px solid #ccc;
-        margin-top: 8px; /* <-- 5. Spasi antar bagian dikurangi lagi */
+        margin-top: 8px;
+        /* <-- 5. Spasi antar bagian dikurangi lagi */
     }
+
     .content-table {
         width: 100%;
-        margin-top: 2px; /* <-- 6. Spasi dikurangi lagi */
-        font-size: 9.5pt; /* Ukuran font tabel */
+        margin-top: 2px;
+        /* <-- 6. Spasi dikurangi lagi */
+        font-size: 9.5pt;
+        /* Ukuran font tabel */
     }
+
     .content-table td {
-        padding: 1px; /* <-- 7. Jarak antar baris dikurangi lagi */
+        padding: 1px;
+        /* <-- 7. Jarak antar baris dikurangi lagi */
         vertical-align: top;
     }
-    .label { width: 35%; }
-    .colon { width: 2%; }
-    .field { width: 63%; border-bottom: 1px dotted #000; }
+
+    .label {
+        width: 35%;
+    }
+
+    .colon {
+        width: 2%;
+    }
+
+    .field {
+        width: 63%;
+        border-bottom: 1px dotted #000;
+    }
+
     .photo-box {
-        width: 85px; /* <-- 8. Kotak foto dikecilkan */
-        height: 115px; /* <-- 8. Kotak foto dikecilkan */
+        width: 85px;
+        /* <-- 8. Kotak foto dikecilkan */
+        height: 115px;
+        /* <-- 8. Kotak foto dikecilkan */
         border: 1px solid #000;
         text-align: center;
         padding-top: 40px;
         font-size: 9.5pt;
     }
-    
+
     /* 9. Kurangi jarak di bagian tanda tangan */
     table[style*="margin-top: 20px"] {
-        margin-top: 15px !important; 
+        margin-top: 15px !important;
     }
 </style>
 
@@ -187,7 +229,7 @@ if (file_exists($logoPath)) {
             <td class="colon">:</td>
             <td class="field"></td>
         </tr>
-         <tr>
+        <tr>
             <td class="label" style="padding-left: 20px;">Pekerjaan</td>
             <td class="colon">:</td>
             <td class="field"></td>
@@ -200,7 +242,8 @@ if (file_exists($logoPath)) {
         <tr>
             <td class="label" style="font-weight: bold;">Ibu</td>
             <td class="colon"></td>
-            <td class="field" style="border:none; padding-top: 5px;"></td> </tr>
+            <td class="field" style="border:none; padding-top: 5px;"></td>
+        </tr>
         <tr>
             <td class="label" style="padding-left: 20px;">Nama</td>
             <td class="colon">:</td>
@@ -216,7 +259,7 @@ if (file_exists($logoPath)) {
             <td class="colon">:</td>
             <td class="field"></td>
         </tr>
-         <tr>
+        <tr>
             <td class="label" style="padding-left: 20px;">Pekerjaan</td>
             <td class="colon">:</td>
             <td class="field"></td>
@@ -250,7 +293,7 @@ if (file_exists($logoPath)) {
             <td class="colon">:</td>
             <td class="field"></td>
         </tr>
-         <tr>
+        <tr>
             <td class="label">Pekerjaan</td>
             <td class="colon">:</td>
             <td class="field"></td>
@@ -262,7 +305,8 @@ if (file_exists($logoPath)) {
         </tr>
     </table>
 
-    <table style="width: 100%; margin-top: 15px; border: none !important;"> <tr style="border: none !important;">
+    <table style="width: 100%; margin-top: 15px; border: none !important;">
+        <tr style="border: none !important;">
             <td style="width: 30%; vertical-align: top; border: none !important;">
                 <div class="photo-box">
                     Pas photo
@@ -271,7 +315,7 @@ if (file_exists($logoPath)) {
                 </div>
             </td>
             <td style="width: 30%; border: none !important;">
-                </td>
+            </td>
             <td style="width: 40%; text-align: left; border: none !important;">
                 Rembang, ........................ 20.....
                 <br>
@@ -281,7 +325,8 @@ if (file_exists($logoPath)) {
         </tr>
     </table>
 
-    <i style="font-size: 8pt; margin-top: 5px; display:block;">* Coret yang tidak perlu</i> </body>
+    <i style="font-size: 8pt; margin-top: 5px; display:block;">* Coret yang tidak perlu</i>
+</body>
 <?php
 // 5. Selesai "menangkap" HTML
 $html = ob_get_clean();
@@ -294,8 +339,8 @@ $dompdf->render();
 
 // 8. Kirim file PDF ke browser untuk di-download
 $nama_file = "formulir-pendaftaran-tpq-roudlotul-ilmi.pdf";
-$dompdf->stream($nama_file, array("Attachment" => 1)); 
+$dompdf->stream($nama_file, array("Attachment" => 1));
 
 // Selesai
 exit;
-?> 
+?>

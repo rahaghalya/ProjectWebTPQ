@@ -21,18 +21,18 @@ $upload_dir = 'assets/img/berita/';
 if (isset($_POST['simpan_berita'])) {
     $judul = mysqli_real_escape_string($koneksi, $_POST['judul']);
     // $isi dihapus
-    $tanggal = date('Y-m-d H:i:s'); 
+    $tanggal = date('Y-m-d H:i:s');
 
     $gambar_nama = $_FILES['gambar']['name'];
     $gambar_tmp = $_FILES['gambar']['tmp_name'];
-    $gambar_unik = time() . '_' . $gambar_nama; 
+    $gambar_unik = time() . '_' . $gambar_nama;
     $target_file = $upload_dir . $gambar_unik;
 
     if (move_uploaded_file($gambar_tmp, $target_file)) {
         // Query disesuaikan, 'isi_berita' dihapus
         $query_insert = "INSERT INTO tabel_berita (judul_berita, gambar_berita, tanggal_upload) 
                          VALUES ('$judul', '$gambar_unik', '$tanggal')";
-        
+
         $result_insert = mysqli_query($koneksi, $query_insert);
 
         if ($result_insert) {
@@ -113,8 +113,16 @@ if (isset($_GET['hapus_id'])) {
 ?>
 
 <style>
-    .table img { max-width: 150px; height: auto; border-radius: 5px; }
-    .table td, .table th { vertical-align: middle; }
+    .table img {
+        max-width: 150px;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .table td,
+    .table th {
+        vertical-align: middle;
+    }
 </style>
 
 <div class="container mt-5">
@@ -144,7 +152,7 @@ if (isset($_GET['hapus_id'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>';
         } elseif (str_contains($status, 'gagal')) {
-             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Gagal!</strong> Terjadi kesalahan. Silakan coba lagi.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>';
@@ -156,10 +164,11 @@ if (isset($_GET['hapus_id'])) {
         <div class="card-header">
             <h5 class="mb-0">Daftar Berita</h5>
         </div>
-        <div class="card-body">
+        <div class="card mb-3">
+          <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
+              <table class="table table-striped">
+                    <thead>
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">Gambar</th>
@@ -213,7 +222,7 @@ if (isset($_GET['hapus_id'])) {
                                                         <label for="judul_edit" class="form-label">Judul Berita</label>
                                                         <input type="text" class="form-control" id="judul_edit" name="judul" value="<?php echo $judul; ?>" required>
                                                     </div>
-                                                    
+
                                                     <div class="mb-3">
                                                         <label class="form-label">Gambar Saat Ini:</label><br>
                                                         <img src="<?php echo $upload_dir . $gambar; ?>" alt="Gambar saat ini" style="max-width: 200px; margin-bottom: 10px;">
@@ -244,7 +253,8 @@ if (isset($_GET['hapus_id'])) {
             </div>
         </div>
     </div>
-</div> <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+</div>
+<div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -257,10 +267,10 @@ if (isset($_GET['hapus_id'])) {
                         <label for="judul" class="form-label">Judul Berita</label>
                         <input type="text" class="form-control" id="judul" name="judul" required>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar Berita</ganti>
-                        <input class="form-control" type="file" id="gambar" name="gambar" required>
+                            <input class="form-control" type="file" id="gambar" name="gambar" required>
                     </div>
                 </div>
                 <div class="modal-footer">

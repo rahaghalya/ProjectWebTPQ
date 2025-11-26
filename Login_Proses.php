@@ -29,12 +29,12 @@ if (empty($username) || empty($password)) {
 try {
     // Sertakan file koneksi database Anda
     include 'koneksi.php'; // Pastikan path ini benar
-    
+
     // Check if connection is successful
     if (!$koneksi || $koneksi->connect_error) {
         throw new Exception('Database connection failed: ' . ($koneksi->connect_error ?? 'Unknown error'));
     }
-    
+
     // Siapkan statement SQL
     $sql = "SELECT * FROM pengguna WHERE username = ?";
     $stmt = $koneksi->prepare($sql);
@@ -50,7 +50,7 @@ try {
 
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
-        
+
         // Debug log
         error_log("User found: " . $user['username']);
         error_log("Password hash in DB: " . $user['pass']);
@@ -78,7 +78,6 @@ try {
     }
 
     $stmt->close();
-
 } catch (Exception $e) {
     error_log("Login error: " . $e->getMessage());
     $response = ['status' => 'error', 'message' => 'Terjadi kesalahan server: ' . $e->getMessage()];
@@ -91,4 +90,3 @@ echo json_encode($response);
 if (isset($koneksi)) {
     $koneksi->close();
 }
-?>

@@ -2,6 +2,7 @@
 session_start();
 include 'koneksi.php';
 require_once 'assets/vendor/dompdf/autoload.inc.php';
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -17,31 +18,41 @@ ob_start();
     body {
         font-family: sans-serif;
     }
+
     table {
         width: 100%;
         border-collapse: collapse;
     }
-    table, th, td {
+
+    table,
+    th,
+    td {
         border: 1px solid #000;
         padding: 5px;
     }
+
     th {
         background-color: #f2f2f2;
         text-align: left;
     }
+
     .report-header {
         text-align: center;
         border-bottom: 3px solid #000;
         padding-bottom: 10px;
         margin-bottom: 30px;
     }
-    .report-header h3, .report-header p {
+
+    .report-header h3,
+    .report-header p {
         margin: 0;
     }
+
     .report-footer {
         text-align: right;
         margin-top: 50px;
     }
+
     .report-footer p {
         margin-bottom: 70px;
     }
@@ -72,7 +83,7 @@ ob_start();
                          FROM santri 
                          WHERE Keterangan = 'Aktif'
                          ORDER BY nama ASC";
-        
+
         $result_santri = mysqli_query($koneksi, $query_santri);
         $no = 1;
 
@@ -97,7 +108,7 @@ ob_start();
 <div class="report-footer">
     <p>Surabaya, <?php echo date('d F Y'); ?></p>
     <p>Kepala TPQ Roudlotul Ilmi</p>
-    
+
     <u>(Nama Kepala TPQ)</u><br>
     NIP. 1234567890
 </div>

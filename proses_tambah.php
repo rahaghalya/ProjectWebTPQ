@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 4. Ambil data FILE
     $foto_tmp_name = $_FILES['foto_upload']['tmp_name'];
     $foto_name = $_FILES['foto_upload']['name'];
-    
+
     // 5. Tentukan folder tujuan (keluar dari 'admin', masuk ke 'assets/img/Guru/')
     $folder_tujuan_server = "../assets/img/Guru/";
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // 7. Pindahkan file
     if (move_uploaded_file($foto_tmp_name, $path_tujuan_server)) {
-        
+
         // --- JIKA UPLOAD FOTO BERHASIL, SIMPAN KE DATABASE ---
 
         // 8. Siapkan path untuk disimpan di DATABASE
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $koneksi->prepare(
             "INSERT INTO guru_tpq (nama, keterangan, foto) VALUES (?, ?, ?)"
         );
-        
+
         // 10. "sss" berarti 3 variabel ini bertipe String
         $stmt->bind_param("sss", $nama, $keterangan, $path_untuk_database);
 
@@ -45,14 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Gagal menyimpan data ke database: " . $stmt->error;
         }
         $stmt->close();
-        
     } else {
         echo "Gagal meng-upload file foto.";
     }
-    
-    $koneksi->close();
 
+    $koneksi->close();
 } else {
     echo "Akses dilarang.";
 }
-?>

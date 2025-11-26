@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'headerdev.php'; 
+include 'headerdev.php';
 
 // Cek Login
 if (!isset($_SESSION['id_user'])) {
@@ -9,26 +9,28 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $id_user_aktif = $_SESSION['id_user'];
-$current_username = $_SESSION['username']; 
+$current_username = $_SESSION['username'];
 
 $pesan_status = '';
 
 // ============================================================
 // --- 1. FUNGSI ENKRIPSI & DEKRIPSI ---
 // ============================================================
-define('KUNCI_RAHASIA', 'KunciTPQ_Roudlotul_Ilmi_2025'); 
+define('KUNCI_RAHASIA', 'KunciTPQ_Roudlotul_Ilmi_2025');
 
-function enkripsi($string) {
+function enkripsi($string)
+{
     $ciphering = "AES-128-CTR";
     $options = 0;
-    $encryption_iv = '1234567891011121'; 
+    $encryption_iv = '1234567891011121';
     return openssl_encrypt($string, $ciphering, KUNCI_RAHASIA, $options, $encryption_iv);
 }
 
-function dekripsi($string) {
+function dekripsi($string)
+{
     $ciphering = "AES-128-CTR";
     $options = 0;
-    $decryption_iv = '1234567891011121'; 
+    $decryption_iv = '1234567891011121';
     return openssl_decrypt($string, $ciphering, KUNCI_RAHASIA, $options, $decryption_iv);
 }
 
@@ -72,7 +74,7 @@ if (isset($_POST['simpan_umum'])) {
 // ============================================================
 if (isset($_POST['ganti_username'])) {
     $new_username = mysqli_real_escape_string($koneksi, $_POST['new_username']);
-    
+
     // Cek tabel 'pengguna', kolom 'username', id 'id_user'
     $query_check = "SELECT id_user FROM pengguna WHERE username = '$new_username' AND id_user != '$id_user_aktif'";
     $result_check = mysqli_query($koneksi, $query_check);
@@ -82,7 +84,7 @@ if (isset($_POST['ganti_username'])) {
     } else {
         $query_update = "UPDATE pengguna SET username = '$new_username' WHERE id_user = '$id_user_aktif'";
         if (mysqli_query($koneksi, $query_update)) {
-            $_SESSION['username'] = $new_username; 
+            $_SESSION['username'] = $new_username;
             $current_username = $new_username;
             $pesan_status = '<div class="alert alert-success alert-dismissible fade show">Username berhasil diganti.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
         } else {
@@ -95,8 +97,8 @@ if (isset($_POST['ganti_username'])) {
 // --- 4. LOGIKA GANTI PASSWORD (KOLOM 'pass') ---
 // ============================================================
 if (isset($_POST['ganti_password'])) {
-    $old_password_input = $_POST['old_password']; 
-    $new_password = $_POST['new_password'];       
+    $old_password_input = $_POST['old_password'];
+    $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
     if ($new_password !== $confirm_password) {
@@ -105,19 +107,19 @@ if (isset($_POST['ganti_password'])) {
         // Ambil password dari tabel 'pengguna', kolom 'pass'
         $query_get = "SELECT pass FROM pengguna WHERE id_user = '$id_user_aktif'";
         $result_get = mysqli_query($koneksi, $query_get);
-        
+
         if ($result_get && mysqli_num_rows($result_get) > 0) {
             $data_user = mysqli_fetch_assoc($result_get);
             $password_di_db = $data_user['pass'];
 
             // Cek: Apakah password di DB saat ini masih POLOS (belum dienkripsi)?
             // Karena di screenshot Anda datanya terlihat seperti "raha1234" (polos)
-            
+
             $password_cocok = false;
 
             // Coba dekripsi dulu (siapa tau sudah terenkripsi)
             $decrypted_db_pass = dekripsi($password_di_db);
-            
+
             if ($old_password_input === $decrypted_db_pass) {
                 // Cocok dengan metode enkripsi
                 $password_cocok = true;
@@ -132,7 +134,7 @@ if (isset($_POST['ganti_password'])) {
 
                 // Update kolom 'pass'
                 $query_update = "UPDATE pengguna SET pass = '$password_baru_encrypted' WHERE id_user = '$id_user_aktif'";
-                
+
                 if (mysqli_query($koneksi, $query_update)) {
                     $pesan_status = '<div class="alert alert-success alert-dismissible fade show">Password berhasil diperbarui!<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
                 } else {
@@ -142,7 +144,7 @@ if (isset($_POST['ganti_password'])) {
                 $pesan_status = '<div class="alert alert-danger alert-dismissible fade show">Password lama salah!<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
             }
         } else {
-             $pesan_status = '<div class="alert alert-danger alert-dismissible fade show">User tidak ditemukan.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+            $pesan_status = '<div class="alert alert-danger alert-dismissible fade show">User tidak ditemukan.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
         }
     }
 }
@@ -174,8 +176,8 @@ while ($row = mysqli_fetch_assoc($result_select)) {
                         <input type="text" class="form-control" name="nama_tpq" value="<?php echo htmlspecialchars($pengaturan['nama_tpq'] ?? ''); ?>">
                     </div>
                     <div class="col-md-6 mb-3">
-                         <label class="form-label">Alamat</label>
-                         <textarea class="form-control" name="alamat_tpq" rows="1"><?php echo htmlspecialchars($pengaturan['alamat_tpq'] ?? ''); ?></textarea>
+                        <label class="form-label">Alamat</label>
+                        <textarea class="form-control" name="alamat_tpq" rows="1"><?php echo htmlspecialchars($pengaturan['alamat_tpq'] ?? ''); ?></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -188,7 +190,7 @@ while ($row = mysqli_fetch_assoc($result_select)) {
                         <input type="text" class="form-control" name="email_tpq" value="<?php echo htmlspecialchars($pengaturan['email_tpq'] ?? ''); ?>">
                     </div>
                 </div>
-                 <div class="row">
+                <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Nama Kepala TPQ</label>
                         <input type="text" class="form-control" name="kepala_tpq" value="<?php echo htmlspecialchars($pengaturan['kepala_tpq'] ?? ''); ?>">
@@ -202,7 +204,7 @@ while ($row = mysqli_fetch_assoc($result_select)) {
             </form>
         </div>
     </div>
-    
+
     <div class="card shadow-sm">
         <div class="card-header bg-success text-white">
             <h5 class="mb-0">Pengaturan Akun (<?php echo htmlspecialchars($current_username); ?>)</h5>

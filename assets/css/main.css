@@ -2398,6 +2398,57 @@ section,
   width: 100%;
 }
 
+
+  /* 1. Style untuk Kartu Berita */
+  .portfolio-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee; /* Opsional: garis tipis */
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+
+  .portfolio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* 2. Container Gambar (Wajib ada tinggi tetap) */
+  .image-container {
+    width: 100%;
+    height: 200px; /* Atur tinggi gambar yang diinginkan disini */
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 3. Trik agar gambar tidak gepeng & fokus wajah */
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Gambar akan mengisi area tanpa merusak rasio */
+    object-position: top center; /* Fokuskan gambar ke bagian atas (agar kepala tidak terpotong) */
+    transition: transform 0.5s ease;
+  }
+
+  /* Efek zoom sedikit saat hover */
+  .image-container:hover img {
+    transform: scale(1.1);
+  }
+
+  /* Style Konten Berita */
+  .portfolio-card .content {
+    padding: 20px;
+    flex-grow: 1; /* Agar tinggi kartu seragam */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+
 @media (max-width: 768px) {
   .portfolio .portfolio-filters {
     flex-wrap: wrap;

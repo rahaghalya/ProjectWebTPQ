@@ -32,42 +32,42 @@ include 'header.php';
 
         // Cek Data
         if (mysqli_num_rows($query) == 0) {
-            echo "<div class='text-center py-5'>Belum ada data sejarah.</div>";
+          echo "<div class='text-center py-5'>Belum ada data sejarah.</div>";
         } else {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($query)) {
-                
-                // Logic Zig-Zag Desktop (Genap=Kanan, Ganjil=Kiri)
-                // Variable ini akan dibaca oleh CSS Media Query
-                $posisi_desktop = ($i % 2 == 0) ? 'left' : 'right';
+          $i = 0;
+          while ($row = mysqli_fetch_assoc($query)) {
 
-                // Cek Gambar
-                $img_src = "assets/img/sejarah/" . $row['gambar'];
-                if (empty($row['gambar']) || !file_exists($img_src)) {
-                    $img_src = "assets/img/logo.png"; // Gambar default
-                }
+            // Logic Zig-Zag Desktop (Genap=Kanan, Ganjil=Kiri)
+            // Variable ini akan dibaca oleh CSS Media Query
+            $posisi_desktop = ($i % 2 == 0) ? 'left' : 'right';
+
+            // Cek Gambar
+            $img_src = "assets/img/sejarah/" . $row['gambar'];
+            if (empty($row['gambar']) || !file_exists($img_src)) {
+              $img_src = "assets/img/logo.png"; // Gambar default
+            }
         ?>
 
-        <li class="timeline-item <?php echo $posisi_desktop; ?>">
-            
-            <div class="timeline-img">
-                <img src="<?php echo htmlspecialchars($img_src); ?>" alt="Tahun <?php echo htmlspecialchars($row['tahun']); ?>">
-            </div>
+            <li class="timeline-item <?php echo $posisi_desktop; ?>">
 
-            <div class="timeline-content">
+              <div class="timeline-img">
+                <img src="<?php echo htmlspecialchars($img_src); ?>" alt="Tahun <?php echo htmlspecialchars($row['tahun']); ?>">
+              </div>
+
+              <div class="timeline-content">
                 <span class="timeline-year"><?php echo htmlspecialchars($row['tahun']); ?></span>
                 <h3 class="timeline-title"><?php echo htmlspecialchars($row['judul']); ?></h3>
                 <p class="text-muted mb-0">
-                    <?php echo htmlspecialchars($row['deskripsi']); ?>
+                  <?php echo htmlspecialchars($row['deskripsi']); ?>
                 </p>
-            </div>
+              </div>
 
-        </li>
+            </li>
 
-        <?php 
-                $i++;
-            } 
-        } 
+        <?php
+            $i++;
+          }
+        }
         ?>
 
       </ul>

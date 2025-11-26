@@ -38,7 +38,7 @@ switch ($action) {
             $stmt = $koneksi->prepare("INSERT INTO santri (no_induk, nama, Alamat, jilid, Tahun_masuk) VALUES (?, ?, ?, ?, ?)");
             // Hati-hati: Kolom di DB Anda (dari query) adalah 'Alamat' dan 'Tahun_masuk' (kapital)
             $stmt->bind_param("sssss", $no_induk, $nama, $alamat, $jilid, $tahun_masuk);
-            
+
             if ($stmt->execute()) {
                 $response['status'] = 'success';
                 $response['message'] = 'Data santri berhasil ditambahkan.';
@@ -52,7 +52,7 @@ switch ($action) {
     // --- READ (untuk form Edit) ---
     case 'ambil_data':
         $no_induk = $_GET['no_induk'] ?? '';
-        
+
         if (empty($no_induk)) {
             $response['message'] = 'No. Induk tidak ada.';
         } else {
@@ -60,7 +60,7 @@ switch ($action) {
             $stmt->bind_param("s", $no_induk);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($data = $result->fetch_assoc()) {
                 $response['status'] = 'success';
                 $response['data'] = $data;
@@ -88,7 +88,7 @@ switch ($action) {
             // Query update
             $stmt = $koneksi->prepare("UPDATE santri SET no_induk = ?, nama = ?, Alamat = ?, jilid = ?, Tahun_masuk = ? WHERE no_induk = ?");
             $stmt->bind_param("ssssss", $no_induk, $nama, $alamat, $jilid, $tahun_masuk, $no_induk_asli);
-            
+
             if ($stmt->execute()) {
                 $response['status'] = 'success';
                 $response['message'] = 'Data santri berhasil diupdate.';
@@ -108,7 +108,7 @@ switch ($action) {
         } else {
             $stmt = $koneksi->prepare("DELETE FROM santri WHERE no_induk = ?");
             $stmt->bind_param("s", $no_induk);
-            
+
             if ($stmt->execute()) {
                 $response['status'] = 'success';
                 $response['message'] = 'Data santri berhasil dihapus.';

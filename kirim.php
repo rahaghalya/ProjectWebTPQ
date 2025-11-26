@@ -23,7 +23,7 @@ $tanggal_formatted = strftime('%d %B %Y', strtotime($tanggal_lahir_raw));
 $tempat_tanggal_lahir_final = $tempat_lahir . ", " . $tanggal_formatted;
 
 // 6. MENGISI DATA DEFAULT
-$jilid = "Belum Ada"; 
+$jilid = "Belum Ada";
 $nik = "0";
 $no_kk = "0";
 $tahun_masuk = date('Y');
@@ -79,5 +79,3 @@ if (mysqli_query($koneksi, $sql)) {
 
 // 10. Tutup koneksi
 mysqli_close($koneksi);
-
-?>

@@ -45,7 +45,7 @@ while ($row = mysqli_fetch_row($result)) {
 
 // Loop melalui setiap tabel
 foreach ($tables as $table) {
-    
+
     // A. Dapatkan struktur tabel (CREATE TABLE)
     $row2 = mysqli_fetch_row(mysqli_query($koneksi, "SHOW CREATE TABLE " . $table));
     $return .= "\n\n" . "-- --------------------------------------------------------\n";
@@ -57,18 +57,18 @@ foreach ($tables as $table) {
     // B. Dapatkan data tabel (INSERT INTO)
     $result = mysqli_query($koneksi, "SELECT * FROM " . $table);
     $num_fields = mysqli_num_fields($result);
-    
+
     if (mysqli_num_rows($result) > 0) {
         $return .= "-- Dumping data untuk tabel `" . $table . "`\n\n";
         $return .= "INSERT INTO `" . $table . "` VALUES";
-        
+
         $i = 0;
         while ($row = mysqli_fetch_row($result)) {
             $return .= ($i == 0) ? "(" : ",(";
             for ($j = 0; $j < $num_fields; $j++) {
                 $row[$j] = addslashes($row[$j]); // Tambahkan slash pada tanda kutip
                 $row[$j] = str_replace("\n", "\\n", $row[$j]); // Handle baris baru
-                
+
                 if (isset($row[$j])) {
                     $return .= '"' . $row[$j] . '"';
                 } else {
@@ -90,4 +90,3 @@ $return .= "COMMIT;";
 // 6. Cetak hasil (akan terdownload oleh browser)
 echo $return;
 exit;
-?>
