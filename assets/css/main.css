@@ -5071,3 +5071,160 @@ section,
         clear: both;
     }
 }
+.timeline {
+  position: relative;
+  padding: 0;
+  list-style: none;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 2. GARIS VERTIKAL (Otomatis memanjang) */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #e9ecef; /* Warna garis */
+  left: 20px; /* Posisi default Mobile (Kiri) */
+  border-radius: 2px;
+}
+
+/* 3. Item Timeline (Wrapper per tahun) */
+.timeline-item {
+  position: relative;
+  margin-bottom: 60px;
+  padding-left: 60px; /* Memberi ruang untuk garis di Mobile */
+}
+
+/* Item terakhir tidak perlu margin bawah */
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 4. MARKER / BULATAN (Titik di garis) */
+.timeline-marker {
+  position: absolute;
+  left: 7px; /* Posisi titik pas di tengah garis (20px) */
+  top: 24px; /* Sejajar dengan bagian atas kartu */
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border: 4px solid var(--accent-color, #0d6efd); /* Menggunakan variabel warna tema */
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 0 3px #fff; /* Outline putih */
+}
+
+/* 5. KARTU KONTEN */
+.timeline-content {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+}
+
+/* 6. GAMBAR UTAMA (HERO) */
+.timeline-hero-img {
+  width: 100%;
+  aspect-ratio: 16/9; /* Rasio tetap agar gambar rapi */
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #eee;
+}
+
+/* 7. TYPOGRAPHY & TEXT AREA */
+.timeline-text-area {
+  padding: 30px;
+}
+
+.timeline-year {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--accent-color, #0d6efd);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+.timeline-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+/* ========================================================
+   RESPONSIVE DESKTOP (ZIG-ZAG LAYOUT)
+   Media Query: Min-Width 992px (Laptop/PC)
+   ======================================================== */
+@media (min_width: 992px) {
+  
+  /* Garis Pindah ke Tengah */
+  .timeline::before {
+    left: 50%;
+    margin-left: -2px;
+  }
+
+  /* Reset Padding Mobile -> Jadi Layout 2 Kolom */
+  .timeline-item {
+    padding-left: 0;
+    width: 50%;
+  }
+
+  /* --- ITEM KIRI (Ganjil) --- */
+  .timeline-item.left {
+    left: 0;
+    padding-right: 60px; /* Jarak konten ke garis tengah */
+    text-align: right;
+  }
+  .timeline-item.left .timeline-marker {
+    left: auto;
+    right: -15px; /* Titik di kanan item */
+  }
+  /* Panah Kecil menunjuk ke kanan */
+  .timeline-item.left .timeline-content::before {
+    content: "";
+    position: absolute;
+    top: 34px;
+    right: -10px;
+    width: 0; height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #fff;
+    z-index: 1;
+  }
+
+  /* --- ITEM KANAN (Genap) --- */
+  .timeline-item.right {
+    left: 50%;
+    padding-left: 60px; /* Jarak konten ke garis tengah */
+    text-align: left;
+  }
+  .timeline-item.right .timeline-marker {
+    left: -15px; /* Titik di kiri item */
+  }
+  /* Panah Kecil menunjuk ke kiri */
+  .timeline-item.right .timeline-content::before {
+    content: "";
+    position: absolute;
+    top: 34px;
+    left: -10px;
+    width: 0; height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #fff;
+    z-index: 1;
+  }
+}

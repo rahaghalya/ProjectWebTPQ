@@ -122,56 +122,84 @@ $total_alumni = $data_alumni['total_alumni'];
     </div>
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
-      <div class="row gy-4 portfolio-container">
+    <div class="row gy-4 portfolio-container">
 
         <?php
-        // Query untuk ambil 4 berita terbaru
+        // Query ambil 4 berita terbaru
         $query_berita = "SELECT * FROM tabel_berita ORDER BY tanggal_upload DESC LIMIT 4";
         $result_berita = mysqli_query($koneksi, $query_berita);
 
-        // Cek apakah ada data
         if (mysqli_num_rows($result_berita) > 0) {
-          while ($row = mysqli_fetch_assoc($result_berita)) {
-            $id_berita = $row['id_berita'];
-            $judul = $row['judul_berita'];
-            $gambar = $row['gambar_berita'];
-            $tanggal = date('d F Y', strtotime($row['tanggal_upload'])); // format: 25 Oktober 2025
+            while ($row = mysqli_fetch_assoc($result_berita)) {
+                $id_berita = $row['id_berita'];
+                $judul = $row['judul_berita'];
+                $gambar = $row['gambar_berita'];
+                $tanggal = date('d F Y', strtotime($row['tanggal_upload']));
+                
+                // Ambil isi berita. Jika kosong, isi default.
+                // Pastikan Langkah 1 (Alter Table) sudah dilakukan!
+                $isi = !empty($row['isi_berita']) ? $row['isi_berita'] : "Tidak ada deskripsi lengkap untuk berita ini.";
         ?>
-            <div class="col-lg-3 col-md-6 portfolio-item">
-              <div class="portfolio-card">
-                <div class="image-container">
-                  <img src="assets/img/berita/<?php echo $gambar; ?>"
-                    class="img-fluid"
-                    alt="<?php echo $judul; ?>">
-                  <div class="overlay">
-                    <div class="overlay-content">
-                      <a href="assets/img/berita/<?php echo $gambar; ?>"
-                        data-gallery="portfolio-gallery-berita"
-                        class="glightbox"><i class="bi bi-zoom-in"></i></a>
+                <div class="col-lg-3 col-md-6 portfolio-item">
+                    <div class="portfolio-card">
+                        <div class="image-container">
+                            <img src="assets/img/berita/<?php echo $gambar; ?>" class="img-fluid" alt="<?php echo $judul; ?>">
+                            <div class="overlay">
+                                <div class="overlay-content">
+                                    <a href="assets/img/berita/<?php echo $gambar; ?>" data-gallery="portfolio-gallery-berita" class="glightbox">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
+                                    <a href="#" title="Baca Detail" data-bs-toggle="modal" data-bs-target="#modalBerita<?php echo $id_berita; ?>">
+                                        <i class="bi bi-file-text"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content" style="text-align: left; padding: 15px;">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalBerita<?php echo $id_berita; ?>">
+                                    <?php echo $judul; ?>
+                                </a>
+                            </h3>
+                            <p style="font-size: 0.8rem; color: #888; margin-bottom: 0;">
+                                <i class="bi bi-calendar-event"></i> <?php echo $tanggal; ?>
+                            </p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div class="content" style="text-align: left; padding: 15px;">
-                  <h3 style="font-size: 1.1rem; font-weight: 600;">
-                    <a href="berita-detail.php?id=<?php echo $id_berita; ?>">
-                      <?php echo $judul; ?>
-                    </a>
-                  </h3>
-                  <p style="font-size: 0.8rem; color: #888; margin-bottom: 0;">
-                    <i class="bi bi-calendar-event"></i> <?php echo $tanggal; ?>
-                  </p>
+
+                <div class="modal fade" id="modalBerita<?php echo $id_berita; ?>" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" style="font-weight: bold;"><?php echo $judul; ?></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center mb-3">
+                                    <img src="assets/img/berita/<?php echo $gambar; ?>" class="img-fluid rounded" style="max-height: 400px;" alt="<?php echo $judul; ?>">
+                                </div>
+                                <p class="text-muted small"><i class="bi bi-calendar-check"></i> <?php echo $tanggal; ?></p>
+                                <hr>
+                                <div style="text-align: justify;">
+                                    <?php echo nl2br($isi); ?>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-        <?php
-          }
+                <?php
+            }
         } else {
-          echo '<p class="text-center">Belum ada berita yang diunggah.</p>';
+            echo '<p class="text-center">Belum ada berita.</p>';
         }
         ?>
 
-      </div>
     </div>
+</div>
   </section>
 
 </main>

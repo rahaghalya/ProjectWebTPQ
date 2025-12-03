@@ -91,10 +91,10 @@ include 'header.php';
               Untuk mencapai visi tersebut, kami berkomitmen untuk:
             </p>
             <ul style="padding-left: 1.2rem;">
-              <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Menyelenggarakan pembelajaran Al-Qur'an yang efektif dan menyenangkan.</li>
-              <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Membimbing santri dalam hafalan dan pemahaman doa harian.</li>
-              <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Menanamkan nilai-nilai akhlakul karimah melalui praktek ibadah.</li>
-              <li><i class="bi bi-check-circle-fill me-2" style="color: var(--accent-color);"></i> Mengembangkan potensi santri melalui kegiatan ekstrakurikuler Islami.</li>
+              <li></i> Menyelenggarakan pembelajaran Al-Qur'an yang efektif dan menyenangkan.</li>
+              <li></i> Membimbing santri dalam hafalan dan pemahaman doa harian.</li>
+              <li></i> Menanamkan nilai-nilai akhlakul karimah melalui praktek ibadah.</li>
+              <li></i> Mengembangkan potensi santri melalui kegiatan ekstrakurikuler Islami.</li>
             </ul>
           </div>
         </div>

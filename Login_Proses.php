@@ -1,92 +1,56 @@
 <?php
-// login_process.php
 session_start();
-
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Set header untuk JSON
 header('Content-Type: application/json');
 
-// Buat array untuk respon
-$response = [];
+// Matikan error reporting di produksi agar tidak bocor ke user
+error_reporting(0); 
+ini_set('display_errors', 0);
 
-// Ambil data dari POST request
+include 'koneksi.php';
+
+$response = [];
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
-// Log received data untuk debugging
-error_log("Login attempt - Username: $username");
-
-// Validasi dasar
 if (empty($username) || empty($password)) {
-    $response = ['status' => 'error', 'message' => 'Username dan password tidak boleh kosong.'];
-    echo json_encode($response);
+    echo json_encode(['status' => 'error', 'message' => 'Username dan password wajib diisi.']);
     exit;
 }
 
-try {
-    // Sertakan file koneksi database Anda
-    include 'koneksi.php'; // Pastikan path ini benar
+// Gunakan Prepared Statement untuk mencegah SQL Injection
+$stmt = $koneksi->prepare("SELECT id_user, username, pass, role FROM pengguna WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // Check if connection is successful
-    if (!$koneksi || $koneksi->connect_error) {
-        throw new Exception('Database connection failed: ' . ($koneksi->connect_error ?? 'Unknown error'));
-    }
+if ($result->num_rows === 1) {
+    $user = $result->fetch_assoc();
+    
+    // --- BAGIAN KUNCI KEAMANAN ---
+    // Gunakan password_verify() untuk mencocokkan inputan dengan hash di database
+    if (password_verify($password, $user['pass'])) {
+        
+        // Login Sukses: Set Session
+        $_SESSION['id_user'] = $user['id_user'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['logged_in'] = true; // Penanda login
 
-    // Siapkan statement SQL
-    $sql = "SELECT * FROM pengguna WHERE username = ?";
-    $stmt = $koneksi->prepare($sql);
+        // Jika Anda punya fitur "Remember Me" (opsional)
+        // if (isset($_POST['remember'])) { ... logika cookie ... }
 
-    if ($stmt === false) {
-        throw new Exception('Gagal mempersiapkan statement: ' . $koneksi->error);
-    }
-
-    // Bind parameter dan execute
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-
-        // Debug log
-        error_log("User found: " . $user['username']);
-        error_log("Password hash in DB: " . $user['pass']);
-        error_log("Input password: $password");
-
-        // Verifikasi password
-        if ($password === $user['pass']) {
-            // Password cocok
-            $_SESSION['id_user'] = $user['id_user'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['logged_in'] = true;
-
-            $response = ['status' => 'success', 'message' => 'Login berhasil!'];
-            error_log("Login successful for user: $username");
-        } else {
-            // Password salah
-            $response = ['status' => 'error', 'message' => 'Username atau password salah.'];
-            error_log("Password verification failed for user: $username");
-        }
+        $response = ['status' => 'success', 'message' => 'Login berhasil!'];
     } else {
-        // User tidak ditemukan
+        // Password Salah
         $response = ['status' => 'error', 'message' => 'Username atau password salah.'];
-        error_log("User not found: $username");
     }
-
-    $stmt->close();
-} catch (Exception $e) {
-    error_log("Login error: " . $e->getMessage());
-    $response = ['status' => 'error', 'message' => 'Terjadi kesalahan server: ' . $e->getMessage()];
+} else {
+    // Username Tidak Ditemukan
+    $response = ['status' => 'error', 'message' => 'Username atau password salah.'];
 }
 
-// Kirim respon JSON
+$stmt->close();
+$koneksi->close();
+
 echo json_encode($response);
-
-// Tutup koneksi
-if (isset($koneksi)) {
-    $koneksi->close();
-}
+?>
